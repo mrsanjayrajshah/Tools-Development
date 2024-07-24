@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headline Analyzer Tool</title>
+    <style>
+        /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.score-card {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    button {
+        font-size: 0.9em;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Headline Analyzer Tool</h1>
+        <div class="input-group">
+            <input type="text" id="headlineInput" placeholder="Enter your headline here...">
+            <button id="analyzeButton">Analyze</button>
+        </div>
+        <div id="scoreCard" class="score-card hidden">
+            <h2>Score Card</h2>
+            <p id="score">Score: 0</p>
+            <p id="feedback">Please enter a headline to analyze.</p>
+        </div>
+    </div>
+    <script>
+        // script.js
+//     document.addEventListener('DOMContentLoaded', () => {
+//     const analyzeButton = document.getElementById('analyzeButton');
+//     const headlineInput = document.getElementById('headlineInput');
+//     const scoreCard = document.getElementById('scoreCard');
+//     const scoreElement = document.getElementById('score');
+//     const feedbackElement = document.getElementById('feedback');
+
+//     analyzeButton.addEventListener('click', () => {
+//         const headline = headlineInput.value.trim();
+
+//         if (headline.length === 0) {
+//             feedbackElement.textContent = 'Please enter a headline.';
+//             scoreCard.classList.add('hidden');
+//             return;
+//         }
+
+//         // Dummy analysis logic (you can replace this with your own)
+//         const score = Math.min(100, Math.max(0, headline.length % 100)); // Example scoring logic
+
+//         // Update score and feedback
+//         scoreElement.textContent = `Score: ${score}`;
+//         feedbackElement.textContent = generateFeedback(score);
+
+//         // Show the score card
+//         scoreCard.classList.remove('hidden');
+//     });
+
+//     function generateFeedback(score) {
+//         if (score >= 80) return 'Excellent headline!';
+//         if (score >= 50) return 'Good headline, but can be improved.';
+//         return 'Headline needs improvement.';
+//     }
+// });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const analyzeButton = document.getElementById('analyzeButton');
+    const headlineInput = document.getElementById('headlineInput');
+    const scoreCard = document.getElementById('scoreCard');
+    const scoreElement = document.getElementById('score');
+    const feedbackElement = document.getElementById('feedback');
+
+    analyzeButton.addEventListener('click', () => {
+        const headline = headlineInput.value.trim();
+
+        if (headline.length === 0) {
+            feedbackElement.textContent = 'Please enter a headline.';
+            scoreCard.classList.add('hidden');
+            return;
+        }
+
+        // Analyze the headline
+        const readabilityScore = calculateReadabilityScore(headline);
+        const keywordScore = checkKeywords(headline);
+        const lengthScore = calculateLengthScore(headline);
+
+        // Calculate the total score (weighted average of different scores)
+        const totalScore = (readabilityScore * 0.4) + (keywordScore * 0.3) + (lengthScore * 0.3);
+
+        // Update score and feedback
+        scoreElement.textContent = `Score: ${Math.round(totalScore)}`;
+        feedbackElement.textContent = generateFeedback(totalScore);
+
+        // Show the score card
+        scoreCard.classList.remove('hidden');
+    });
+
+    function calculateReadabilityScore(headline) {
+        // Flesch-Kincaid Readability Score Calculation
+        const words = headline.split(' ').length;
+        const sentences = (headline.match(/[.!?]/g) || []).length + 1; // Approximate number of sentences
+        const syllables = headline.split('').filter(char => 'aeiou'.includes(char.toLowerCase())).length;
+
+        // Using the Flesch-Kincaid formula
+        const score = 206.835 - (1.015 * (words / sentences)) - (84.6 * (syllables / words));
+        return Math.min(Math.max(score, 0), 100); // Normalize between 0 and 100
+    }
+
+    function checkKeywords(headline) {
+        // List of important keywords (example)
+        const keywords = ['sale', 'discount', 'offer', 'buy', 'free', 'limited time', 'new', 'exclusive'];
+        let keywordCount = 0;
+
+        keywords.forEach(keyword => {
+            if (headline.toLowerCase().includes(keyword)) {
+                keywordCount++;
+            }
+        });
+
+        return Math.min(keywordCount * 20, 100); // Each keyword adds up to 20 points
+    }
+
+    function calculateLengthScore(headline) {
+        // Evaluate headline length
+        const length = headline.length;
+        if (length <= 30) return 100; // Ideal length
+        if (length <= 60) return 80;  // Slightly long
+        if (length <= 90) return 60;  // Too long
+        return 40;                    // Excessively long
+    }
+
+    function generateFeedback(score) {
+        if (score >= 80) return 'Excellent headline!';
+        if (score >= 50) return 'Good headline, but can be improved.';
+        return 'Headline needs improvement.';
+    }
+});
+
+    </script>
+</body>
+</html>

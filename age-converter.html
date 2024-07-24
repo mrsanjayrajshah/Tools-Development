@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f2f2f2;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            width: 100%;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background: #007BFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 520px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff4d4d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <div class="input-container">
+            <label for="birthdate">Enter your birthdate:</label>
+            <input type="date" id="birthdate">
+        </div>
+        <div class="button-container">
+            <button onclick="resetForm()">Reset</button>
+            <button onclick="calculateAge()">Calculate Age</button>
+        </div>
+        <div class="output">
+            <p id="ageOutput"></p>
+            <p id="daysOutput"></p>
+            <p id="birthdayOutput"></p>
+        </div>
+    </div>
+    <div id="notification" class="notification">Please enter a valid date</div>
+    <script>
+        function calculateAge() {
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            if (!birthdate || isNaN(birthdate)) {
+                showNotification();
+                return;
+            }
+
+            const today = new Date();
+            const age = today.getFullYear() - birthdate.getFullYear();
+            const monthDiff = today.getMonth() - birthdate.getMonth();
+            const dayDiff = today.getDate() - birthdate.getDate();
+
+            // Correct age if the birthdate hasn't occurred yet this year
+            let correctedAge = age;
+            if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                correctedAge--;
+            }
+
+            const nextBirthday = new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate());
+            if (today > nextBirthday) {
+                nextBirthday.setFullYear(today.getFullYear() + 1);
+            }
+
+            const daysUntilNextBirthday = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
+
+            const ageInDays = Math.floor((today - birthdate) / (1000 * 60 * 60 * 24));
+
+            document.getElementById('ageOutput').textContent = `Your age is: ${correctedAge} years`;
+            document.getElementById('daysOutput').textContent = `Your age in days since birth: ${ageInDays} days`;
+            document.getElementById('birthdayOutput').textContent = `Days left for your next birthday: ${daysUntilNextBirthday} days`;
+        }
+
+        function resetForm() {
+            document.getElementById('birthdate').value = '';
+            document.getElementById('ageOutput').textContent = '';
+            document.getElementById('daysOutput').textContent = '';
+            document.getElementById('birthdayOutput').textContent = '';
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

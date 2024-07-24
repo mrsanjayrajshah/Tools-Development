@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #eef2f3;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .p-2,
+      .p-md-4 {
+        padding: 1rem;
+      }
+
+      .p-md-2 {
+        padding: 0.5rem;
+      }
+
+      .pb-4 {
+        padding-bottom: 2rem;
+      }
+
+      .px-md-3 {
+        padding: 1rem;
+      }
+
+      .input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .input-group-prepend {
+        margin-right: 1rem;
+      }
+
+      .custom-select {
+        flex-grow: 1;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+      }
+
+      .calculator-btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        margin: 0.5rem 0;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 0.25rem;
+        cursor: pointer;
+      }
+
+      .calculator-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .description-calc {
+        margin-top: 1rem;
+      }
+
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+        padding: 1rem;
+        background-color: #fff;
+      }
+
+      .slidecontainer {
+        margin-top: 1rem;
+      }
+
+      .slider {
+        width: 100%;
+        height: 15px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+      }
+
+      .slider:hover {
+        opacity: 1;
+      }
+
+      .calculator-btn.form-b {
+        background-color: #28a745;
+      }
+
+      .calculator-btn.form-b:hover {
+        background-color: #218838;
+      }
+    </style>
+    
+
+    <style>
+.table-container {
+  overflow-x: auto;
+  max-width: 870px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+  background-color: #e0e0e0;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div
+        class="p-2 p-md-4"
+        style="max-width: 870px; margin: auto; padding: 15px"
+      >
+        <div class="p-md-2 pb-4">
+          <h1 class="p-2" style="text-align: center; font-weight: bold">
+            AdSense Revenue Calculator
+          </h1>
+          <h4 class="p-1" style="text-align: center">
+            See how much your website could earn from AdSense and Header Bidding
+          </h4>
+        </div>
+        <div class="px-md-3">
+          <div class="">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputRegion"
+                  >Select a Region
+                </label>
+              </div>
+              <select id="inputRegion" class="custom-select">
+                <option id="Tier1" selected="selected" value="1">
+                  Tier 1 Countries
+                </option>
+                <option id="Tier2" value="0.67">Tier 2 Countries</option>
+                <option id="Tier3" value="0.36">Tier 3 Countries</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputCategory"
+                  >Select a Category</label
+                >
+              </div>
+              <select id="inputCategory" class="custom-select">
+                <option selected="selected" value="0.00624">
+                  Arts &amp; Entertainment
+                </option>
+                <option value="0.01244">Autos &amp; Vehicles</option>
+                <option value="0.01007">Beauty &amp; Fitness</option>
+                <option value="0.00577">Books &amp; Literature</option>
+                <option value="0.01831">Business &amp; Industrial</option>
+                <option value="0.00755">Computers &amp; Electronics</option>
+                <option value="0.0312">Finance</option>
+                <option value="0.00835">Food &amp; Drink</option>
+                <option value="0.00494">Games</option>
+                <option value="0.01751">Health</option>
+                <option value="0.01126">Hobbies &amp; Leisure</option>
+                <option value="0.02171">Home &amp; Garden</option>
+                <option value="0.01362">Internet &amp; Telecom</option>
+                <option value="0.01371">Jobs &amp; Education</option>
+                <option value="0.01371">Law &amp; Government</option>
+                <option value="0.00712">News</option>
+                <option value="0.00843">Online Communities</option>
+                <option value="0.01009">People &amp; Society</option>
+                <option value="0.01242">Pets &amp; Animals</option>
+                <option value="0.02241">Real Estate</option>
+                <option value="0.00905">Reference</option>
+                <option value="0.00847">Science</option>
+                <option value="0.01323">Shopping</option>
+                <option value="0.00648">Sports</option>
+                <option value="0.01535">Travel</option>
+              </select>
+            </div>
+            <button
+              class="calculator-btn"
+              onclick="myFunctionTier1()"
+              type="button"
+            >
+              Tier 1 Country List
+            </button>
+            <button
+              class="calculator-btn"
+              onclick="myFunctionTier2()"
+              type="button"
+            >
+              Tier 2 Country List
+            </button>
+            <button
+              class="calculator-btn"
+              onclick="myFunctionTier3()"
+              type="button"
+            >
+              Tier 3 Country List
+            </button>
+            <div
+              id="Tier1Countries"
+              class="description-calc"
+              style="display: none"
+            >
+              <div class="card card-body">
+                <p style="font-weight: bold">Tier 1 Countries</p>
+                <p>
+                  Australia, Austria, Belgium, Canada, Denmark, Finland, France,
+                  Germany, Ireland, Italy, Luxembourg, Netherlands, New Zealand,
+                  Norway, Spain, Sweden, Switzerland, United Kingdom, United
+                  States of America
+                </p>
+              </div>
+            </div>
+            <div
+              id="Tier2Countries"
+              class="description-calc"
+              style="display: none"
+            >
+              <div class="card card-body">
+                <p style="font-weight: bold">Tier 2 Countries</p>
+                <p>
+                  Andorra, Argentina, Bahamas, Belarus, Bolivia, Bosnia and
+                  Herzegovina, Brazil, Brunei, Bulgaria, Chile, China, Colombia,
+                  Costa Rica, Croatia, Cyprus, Czech Republic, Dominican
+                  Republic, Ecuador, Egypt, Estonia, Fiji, Greece, Guyana, Hong
+                  Kong, Hungary, Iceland, Indonesia, Israel, Japan, Kazakhstan,
+                  Latvia, Lithuania, Macao, Malaysia, Malta, Mexico, Montenegro,
+                  Morocco, Nepal, Oman, Panama, Paraguay, Peru, Philippines,
+                  Poland, Portugal, Puerto Rico, Qatar, Republic of Korea
+                  (South), Romania, Russian Federation, Saudi Arabia, Serbia,
+                  Singapore, Slovakia, Slovenia, South Africa, Thailand, Turkey,
+                  Ukraine, United Arab Emirates, Uruguay, Vanuatu
+                </p>
+              </div>
+            </div>
+            <div
+              id="Tier3Countries"
+              class="description-calc"
+              style="display: none"
+            >
+              <div class="card card-body">
+                <p style="font-weight: bold">Tier 3 Countries</p>
+                <p>
+                  Albania, Algeria, Angola, Armenia, Azerbaijan, Bahrain,
+                  Bangladesh, Barbados, Belize, Benin, Botswana, Burkina Faso,
+                  Burundi, Cambodia, Cameroon, Cape Verde, Chad, Comoros, Congo,
+                  El Salvador, Ethiopia, Gabon, Georgia, Guatemala, Guinea,
+                  Haiti, Honduras, India, Iraq, Jamaica, Jordan, Kenya, Kuwait,
+                  Kyrgyzstan, Laos, Lebanon, Lesotho, Macedonia, Madagascar,
+                  Mali, Mauritania, Mauritius, Moldova, Mongolia, Mozambique,
+                  Namibia, Nicaragua, Niger, Nigeria, Pakistan, Senegal, Sri
+                  Lanka, Suriname, Swaziland, Tajikistan, Tanzania, Togo,
+                  Trinidad and Tobago, Tunisia, Turkmenistan, Uganda,
+                  Uzbekistan, Vietnam, Zambia
+                </p>
+              </div>
+            </div>
+            <div class="slidecontainer">
+              <p style="font-weight: bold">
+                Pageviews Per Month: <span id="sliderVal">1,000,000</span>
+              </p>
+              <input
+                id="myRange"
+                class="slider"
+                max="10000000"
+                min="50000"
+                type="range"
+                value="1000000"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <p style="text-align: center; margin-top: 30px; margin-bottom: 5px">
+            Estimated Annual Revenue:
+          </p>
+          <p
+            class=""
+            style="
+              text-align: center;
+              font-weight: bold;
+              font-size: 3rem;
+              color: #2dc8ab;
+              margin-bottom: 0;
+            "
+          >
+            AdSense: $<span id="adSense_out"></span>
+          </p>
+          <p
+            class=""
+            style="
+              text-align: center;
+              font-weight: bold;
+              font-size: 3rem;
+              color: #0066ff;
+            "
+          >
+            Header Bidding: $<span id="headerBidding_out"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Tabular Data's -->
+    <h2 style="text-align: center; font-weight: bold; font-size: 2em;">AdSense Revenue Data</h2>
+    <div class="table-container">
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>CTR</th>
+            <th>CPC (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data rows will be added dynamically -->
+        </tbody>
+      </table>
+    </div>
+    <script>
+        // AdSense Revenue Calculator Formula
+      var slider = document.getElementById("myRange");
+      var slider_val = document.getElementById("sliderVal");
+      var adSense_out = document.getElementById("adSense_out");
+      var headerBidding_out = document.getElementById("headerBidding_out");
+      var inputRegion = document.getElementById("inputRegion");
+      var inputCategory = document.getElementById("inputCategory");
+      var adSenseCalc = 0;
+      var headerBiddingCalc = 0;
+
+      slider_val.innerHTML = numberWithCommas(slider.value);
+
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+      adSenseCalc = Math.round(
+        12 * inputCategory.value * inputRegion.value * slider.value
+      );
+      adSense_out.innerHTML = numberWithCommas(adSenseCalc);
+      headerBiddingCalc = Math.round(adSenseCalc * 1.43);
+      headerBidding_out.innerHTML = numberWithCommas(headerBiddingCalc);
+
+      slider.oninput = function () {
+        slider_val.innerHTML = numberWithCommas(this.value);
+        adSenseCalc = Math.round(
+          this.value * 12 * inputCategory.value * inputRegion.value
+        );
+        adSense_out.innerHTML = numberWithCommas(adSenseCalc);
+        headerBiddingCalc = Math.round(adSenseCalc * 1.43);
+        headerBidding_out.innerHTML = numberWithCommas(headerBiddingCalc);
+      };
+
+      inputRegion.oninput = function () {
+        adSenseCalc = Math.round(
+          this.value * 12 * inputCategory.value * slider.value
+        );
+        adSense_out.innerHTML = numberWithCommas(adSenseCalc);
+        headerBiddingCalc = Math.round(adSenseCalc * 1.43);
+        headerBidding_out.innerHTML = numberWithCommas(headerBiddingCalc);
+      };
+
+      inputCategory.oninput = function () {
+        adSenseCalc = Math.round(
+          this.value * 12 * inputRegion.value * slider.value
+        );
+        adSense_out.innerHTML = numberWithCommas(adSenseCalc);
+        headerBiddingCalc = Math.round(adSenseCalc * 1.43);
+        headerBidding_out.innerHTML = numberWithCommas(headerBiddingCalc);
+      };
+
+      function myFunctionTier3() {
+        var x = document.getElementById("Tier3Countries");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+      function myFunctionTier2() {
+        var x = document.getElementById("Tier2Countries");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+      function myFunctionTier1() {
+        var x = document.getElementById("Tier1Countries");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+    
+      /* Table dynamic data fetching start */
+      document.addEventListener('DOMContentLoaded', function() {
+      const tableBody = document.querySelector('#data-table tbody');
+
+  // Sample data (replace with actual data loading)
+  const data = [
+    { country: 'Luxembourg', ctr: '0.55%', cpc: '0.65' },
+    { country: 'United States', ctr: '0.75%', cpc: '0.61' },
+    { country: 'Australia', ctr: '0.72%', cpc: '0.57' },
+    { country: 'United Kingdom', ctr: '1.06%', cpc: '0.48' },
+    { country: 'Finland', ctr: '0.54%', cpc: '0.45' },
+    { country: 'Canada', ctr: '0.79%', cpc: '0.45' },
+    { country: 'Austria', ctr: '0.69%', cpc: '0.45' },
+    { country: 'New Zealand', ctr: '1.21%', cpc: '0.33' },
+    { country: 'Sweden', ctr: '0.70%', cpc: '0.31' },
+    { country: 'Ireland', ctr: '0.73%', cpc: '0.31' },
+    { country: 'Denmark', ctr: '0.70%', cpc: '0.28' },
+    { country: 'Singapore', ctr: '0.96%', cpc: '0.27' },
+    { country: 'South Africa', ctr: '1.13%', cpc: '0.26' },
+    { country: 'Norway', ctr: '0.63%', cpc: '0.26' },
+    { country: 'Unknown Region', ctr: '0.63%', cpc: '0.25' },
+    { country: 'Bahamas', ctr: '1.71%', cpc: '0.24' },
+    { country: 'Germany', ctr: '0.52%', cpc: '0.22' },
+    { country: 'Switzerland', ctr: '0.59%', cpc: '0.21' },
+    { country: 'Belgium', ctr: '0.53%', cpc: '0.21' },
+    { country: 'Spain', ctr: '0.67%', cpc: '0.19' },
+    { country: 'Djibouti', ctr: '3.06%', cpc: '0.19' },
+    { country: 'Thailand', ctr: '0.80%', cpc: '0.17' },
+    { country: 'France', ctr: '0.76%', cpc: '0.17' },
+    { country: 'Colombia', ctr: '0.29%', cpc: '0.17' },
+    { country: 'Puerto Rico', ctr: '1.40%', cpc: '0.16' },
+    { country: 'Guatemala', ctr: '0.74%', cpc: '0.16' },
+    { country: 'Greece', ctr: '0.64%', cpc: '0.16' },
+    { country: 'United Arab Emirates', ctr: '1.37%', cpc: '0.15' },
+    { country: 'Russia', ctr: '0.39%', cpc: '0.15' },
+    { country: 'Malta', ctr: '1.34%', cpc: '0.15' },
+    { country: 'U.S. Virgin Islands', ctr: '3.85%', cpc: '0.14' },
+    { country: 'Mexico', ctr: '0.39%', cpc: '0.14' },
+    { country: 'Japan', ctr: '1.14%', cpc: '0.14' },
+    { country: 'Italy', ctr: '1.35%', cpc: '0.13' },
+    { country: 'Hungary', ctr: '0.76%', cpc: '0.13' },
+    { country: 'Hong Kong', ctr: '0.94%', cpc: '0.13' },
+    { country: 'Côte d’Ivoire', ctr: '0.69%', cpc: '0.13' },
+    { country: 'Somalia', ctr: '0.94%', cpc: '0.12' },
+    { country: 'Dominica', ctr: '2.33%', cpc: '0.12' },
+    { country: 'Costa Rica', ctr: '0.45%', cpc: '0.12' },
+    { country: 'Brazil', ctr: '0.79%', cpc: '0.12' },
+    { country: 'Yemen', ctr: '0.33%', cpc: '0.11' },
+    { country: 'Uganda', ctr: '0.80%', cpc: '0.11' },
+    { country: 'Panama', ctr: '1.68%', cpc: '0.11' },
+    { country: 'Oman', ctr: '1.43%', cpc: '0.11' },
+    { country: 'Nigeria', ctr: '0.76%', cpc: '0.11' },
+    { country: 'Malaysia', ctr: '0.94%', cpc: '0.11' },
+    { country: 'Kuwait', ctr: '1.56%', cpc: '0.11' },
+    { country: 'Israel', ctr: '1.21%', cpc: '0.11' },
+    { country: 'Dominican Republic', ctr: '1.12%', cpc: '0.11' },
+    { country: 'China', ctr: '0.66%', cpc: '0.11' },
+    { country: 'Cayman Islands', ctr: '0.68%', cpc: '0.11' },
+    { country: 'Botswana', ctr: '1.38%', cpc: '0.11' },
+    { country: 'South Korea', ctr: '0.82%', cpc: '0.10' },
+    { country: 'Qatar', ctr: '1.22%', cpc: '0.10' },
+    { country: 'Argentina', ctr: '1.09%', cpc: '0.10' },
+    { country: 'Saudi Arabia', ctr: '1.64%', cpc: '0.09' },
+    { country: 'Czechia', ctr: '0.96%', cpc: '0.09' },
+    { country: 'Jamaica', ctr: '0.42%', cpc: '0.08' },
+    { country: 'Cameroon', ctr: '0.71%', cpc: '0.08' },
+    { country: 'Bahrain', ctr: '1.24%', cpc: '0.08' },
+    { country: 'Afghanistan', ctr: '1.35%', cpc: '0.08' },
+    { country: 'Zambia', ctr: '0.52%', cpc: '0.07' },
+    { country: 'Trinidad & Tobago', ctr: '1.41%', cpc: '0.07' },
+    { country: 'Portugal', ctr: '0.74%', cpc: '0.07' },
+    { country: 'Poland', ctr: '0.40%', cpc: '0.07' },
+    { country: 'Mongolia', ctr: '1.57%', cpc: '0.07' },
+    { country: 'Kenya', ctr: '0.76%', cpc: '0.07' },
+    { country: 'India', ctr: '1.64%', cpc: '0.07' },
+    { country: 'Brunei', ctr: '1.01%', cpc: '0.07' },
+    { country: 'Zimbabwe', ctr: '0.47%', cpc: '0.06' },
+    { country: 'Turkey', ctr: '0.93%', cpc: '0.06' },
+    { country: 'Suriname', ctr: '1.04%', cpc: '0.06' },
+    { country: 'Sierra Leone', ctr: '1.29%', cpc: '0.06' },
+    { country: 'Romania', ctr: '0.71%', cpc: '0.06' },
+    { country: 'Kazakhstan', ctr: '1.16%', cpc: '0.06' },
+    { country: 'Indonesia', ctr: '0.73%', cpc: '0.06' },
+    { country: 'Honduras', ctr: '0.81%', cpc: '0.06' },
+    { country: 'Estonia', ctr: '1.53%', cpc: '0.06' },
+    { country: 'Egypt', ctr: '1.20%', cpc: '0.06' },
+    { country: 'Cyprus', ctr: '1.26%', cpc: '0.06' },
+    { country: 'Algeria', ctr: '1.30%', cpc: '0.06' },
+    { country: 'Tanzania', ctr: '0.85%', cpc: '0.05' },
+    { country: 'Myanmar (Burma)', ctr: '1.18%', cpc: '0.05' },
+    { country: 'Moldova', ctr: '1.27%', cpc: '0.05' },
+    { country: 'Haiti', ctr: '1.41%', cpc: '0.05' },
+    { country: 'Ghana', ctr: '0.51%', cpc: '0.05' },
+    { country: 'Fiji', ctr: '1.15%', cpc: '0.05' },
+    { country: 'Congo – Kinshasa', ctr: '0.94%', cpc: '0.05' },
+    { country: 'Bulgaria', ctr: '0.48%', cpc: '0.05' },
+    { country: 'Solomon Islands', ctr: '4.35%', cpc: '0.04' },
+    { country: 'Serbia', ctr: '0.36%', cpc: '0.04' },
+    { country: 'Philippines', ctr: '2.66%', cpc: '0.04' },
+    { country: 'Peru', ctr: '0.37%', cpc: '0.04' },
+    { country: 'Pakistan', ctr: '0.70%', cpc: '0.04' },
+    { country: 'Namibia', ctr: '0.92%', cpc: '0.04' },
+    { country: 'Mozambique', ctr: '0.96%', cpc: '0.04' },
+    { country: 'Maldives', ctr: '0.82%', cpc: '0.04' },
+    { country: 'Macedonia (FYROM)', ctr: '0.54%', cpc: '0.04' },
+    { country: 'Iraq', ctr: '1.58%', cpc: '0.04' },
+    { country: 'Guyana', ctr: '0.65%', cpc: '0.04' },
+    { country: 'Cape Verde', ctr: '2.38%', cpc: '0.04' },
+    { country: 'Bhutan', ctr: '1.08%', cpc: '0.04' },
+    { country: 'Barbados', ctr: '1.76%', cpc: '0.04' },
+    { country: 'American Samoa', ctr: '21.43%', cpc: '0.04' },
+    { country: 'Vietnam', ctr: '0.90%', cpc: '0.03' },
+    { country: 'Ukraine', ctr: '0.32%', cpc: '0.03' },
+    { country: 'Taiwan', ctr: '1.54%', cpc: '0.03' },
+    { country: 'Swaziland', ctr: '0.67%', cpc: '0.03' },
+    { country: 'Sri Lanka', ctr: '0.66%', cpc: '0.03' },
+    { country: 'Rwanda', ctr: '1.19%', cpc: '0.03' },
+    { country: 'Paraguay', ctr: '4.82%', cpc: '0.03' },
+    { country: 'Papua New Guinea', ctr: '0.61%', cpc: '0.03' },
+    { country: 'Nepal', ctr: '0.88%', cpc: '0.03' },
+    { country: 'Mauritius', ctr: '0.44%', cpc: '0.03' },
+    { country: 'Macau', ctr: '1.59%', cpc: '0.03' },
+    { country: 'Lebanon', ctr: '1.62%', cpc: '0.03' },
+    { country: 'Latvia', ctr: '0.64%', cpc: '0.03' },
+    { country: 'Jordan', ctr: '2.10%', cpc: '0.03' },
+    { country: 'Iran', ctr: '0.25%', cpc: '0.03' },
+    { country: 'Guam', ctr: '1.22%', cpc: '0.03' },
+    { country: 'Ethiopia', ctr: '0.70%', cpc: '0.03' },
+    { country: 'Congo – Brazzaville', ctr: '1.91%', cpc: '0.03' },
+    { country: 'Bolivia', ctr: '3.25%', cpc: '0.03' },
+    { country: 'Belarus', ctr: '1.00%', cpc: '0.03' },
+    { country: 'Bangladesh', ctr: '0.92%', cpc: '0.03' },
+    { country: 'St. Lucia', ctr: '0.70%', cpc: '0.02' },
+    { country: 'Seychelles', ctr: '1.32%', cpc: '0.02' },
+    { country: 'Morocco', ctr: '0.35%', cpc: '0.02' },
+    { country: 'Mali', ctr: '0.84%', cpc: '0.02' },
+    { country: 'Malawi', ctr: '0.25%', cpc: '0.02' },
+    { country: 'Lithuania', ctr: '0.71%', cpc: '0.02' },
+    { country: 'Libya', ctr: '1.28%', cpc: '0.02' },
+    { country: 'Liberia', ctr: '2.47%', cpc: '0.02' },
+    { country: 'Chile', ctr: '0.49%', cpc: '0.02' },
+    { country: 'Caribbean Netherlands', ctr: '1.83%', cpc: '0.02' },
+    { country: 'Cambodia', ctr: '0.54%', cpc: '0.02' },
+    { country: 'Burundi', ctr: '1.65%', cpc: '0.02' },
+    { country: 'Benin', ctr: '1.09%', cpc: '0.02' },
+    { country: 'Angola', ctr: '1.02%', cpc: '0.02' },
+    { country: 'Timor-Leste', ctr: '1.23%', cpc: '0.01' },
+    { country: 'Syria', ctr: '1.34%', cpc: '0.01' },
+    { country: 'Sudan', ctr: '1.17%', cpc: '0.01' },
+    { country: 'Senegal', ctr: '0.36%', cpc: '0.01' },
+    { country: 'Madagascar', ctr: '1.38%', cpc: '0.01' },
+    { country: 'Georgia', ctr: '0.71%', cpc: '0.01' },
+    { country: 'French Polynesia', ctr: '8.33%', cpc: '0.01' },
+    { country: 'Burkina Faso', ctr: '3.33%', cpc: '0.01' },
+];
+
+  // Populate table rows
+  data.forEach(entry => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${entry.country}</td>
+      <td>${entry.ctr}</td>
+      <td>${entry.cpc}</td>
+    `;
+    tableBody.appendChild(row);
+  });
+});
+
+    </script>
+  </body>
+</html>

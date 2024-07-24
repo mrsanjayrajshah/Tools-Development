@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Card Tag Generator</title>
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+.heading {
+    background-color: #1da1f2;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus, textarea:focus {
+    border-color: #1da1f2;
+    box-shadow: 0 0 5px rgba(29, 161, 242, 0.5);
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    background-color: #1da1f2;
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 48%;
+}
+
+button:hover {
+    background-color: #0d95e8;
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+   </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Twitter Card Tag Generator</h1>
+        <form id="twitterCardForm">
+            <div class="form-group">
+                <label for="cardType">Card Type:</label>
+                <select id="cardType" name="cardType">
+                    <option value="summary">Summary</option>
+                    <option value="summary_large_image">Summary with Large Image</option>
+                    <option value="app">App</option>
+                    <option value="player">Player</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description">
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image URL:</label>
+                <input type="text" id="image" name="image">
+            </div>
+
+            <div class="form-group">
+                <label for="url">URL:</label>
+                <input type="text" id="url" name="url">
+            </div>
+
+            <div class="button-group">
+                <button type="button" onclick="generateTwitterCardTags()">Generate</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+        <textarea id="output" readonly></textarea>
+    </div>
+    <script>
+        function generateTwitterCardTags() {
+    const cardType = document.getElementById('cardType').value;
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const image = document.getElementById('image').value;
+    const url = document.getElementById('url').value;
+
+    let twitterCardTags = '';
+
+    if (cardType) {
+        twitterCardTags += `<meta name="twitter:card" content="${cardType}">\n`;
+    }
+    if (title) {
+        twitterCardTags += `<meta name="twitter:title" content="${title}">\n`;
+    }
+    if (description) {
+        twitterCardTags += `<meta name="twitter:description" content="${description}">\n`;
+    }
+    if (image) {
+        twitterCardTags += `<meta name="twitter:image" content="${image}">\n`;
+    }
+    if (url) {
+        twitterCardTags += `<meta name="twitter:url" content="${url}">\n`;
+    }
+
+    document.getElementById('output').value = twitterCardTags;
+}
+
+    </script>
+</body>
+</html>

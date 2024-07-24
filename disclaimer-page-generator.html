@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer Page Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .heading {
+            background-color: #ff8a94;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            border-color: #ff8a94;
+            box-shadow: 0 0 5px rgba(255, 138, 148, 0.5);
+        }
+
+        textarea {
+            height: 200px;
+            resize: none;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            background-color: #ff8a94;
+            border: none;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 48%;
+        }
+
+        button:hover {
+            background-color: #ff6f7f;
+        }
+
+        #copyButton {
+            background-color: #28a745;
+        }
+
+        #copyButton:hover {
+            background-color: #218838;
+        }
+
+        .notification {
+            display: none;
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 16px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+
+        #previewContainer {
+            margin-top: 20px;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #previewContainer h1 {
+            font-size: 20px;
+            color: #ff8a94;
+        }
+
+        #previewContainer p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Disclaimer Page Generator Tool</h1>
+        <form id="disclaimerForm">
+            <div class="form-group">
+                <label for="websiteUrl">Website URL:</label>
+                <input type="text" id="websiteUrl" name="websiteUrl" placeholder="Enter website URL" required>
+            </div>
+            <div class="form-group">
+                <label for="websiteName">Website Name:</label>
+                <input type="text" id="websiteName" name="websiteName" placeholder="Enter website name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="text" id="email" name="email" placeholder="Enter email ID" required>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="generateDisclaimer()">Generate Disclaimer</button>
+                <button type="reset">Reset</button>
+            </div>
+            <div class="form-group">
+                <label for="disclaimer">Generated Disclaimer:</label>
+                <textarea id="disclaimer" name="disclaimer" readonly></textarea>
+                <button type="button" id="copyButton">Copy to Clipboard</button>
+                <div id="notification" class="notification">Copied!</div>
+            </div>
+            <div id="previewContainer">
+                <h1>Preview</h1>
+                <div id="previewContent"></div>
+            </div>
+        </form>
+    </div>
+    <script>
+        function generateDisclaimer() {
+            const websiteUrl = document.getElementById('websiteUrl').value;
+            const websiteName = document.getElementById('websiteName').value;
+            const email = document.getElementById('email').value;
+
+            if (!websiteUrl || !websiteName || !email) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            let disclaimer = `<h1>Disclaimer for "${websiteName}"</h1>
+                <p>If you require any more information or have any questions about our site's disclaimer, please feel free to contact us by email at ${email}.</p>
+                <p>All the information on this website - "${websiteUrl}" is published in good faith and for general information purpose only. ${websiteName} does not make any warranties about the completeness, reliability, and accuracy of this information. Any action you take upon the information you find on this website, is strictly at your own risk. ${websiteName} will not be liable for any losses and/or damages in connection with the use of our website. From our website, you can visit other websites by following hyperlinks to such external sites. While we strive to provide only quality links to useful and ethical websites, we have no control over the content and nature of these sites. These links to other websites do not imply a recommendation for all the content found on these sites. Site owners and content may change without notice and may occur before we have the opportunity to remove a link which may have gone 'bad'. Please be also aware that when you leave our website, other sites may have different privacy policies and terms which are beyond our control. Please be sure to check the Privacy Policies of these sites as well as their Terms of Service before engaging in any business or uploading any information.</p>
+                <h1>Consent</h1>
+                <p>By using our website, you hereby consent to our disclaimer and agree to its terms.</p>
+                <h1>Update</h1>
+                <p>Should we update, amend or make any changes to this document, those changes will be prominently posted here.</p>`;
+
+            // Update the textarea and preview
+            document.getElementById('disclaimer').value = disclaimer;
+            document.getElementById('previewContent').innerHTML = disclaimer;
+        }
+
+        document.getElementById('copyButton').addEventListener('click', () => {
+            const disclaimerText = document.getElementById('disclaimer');
+            disclaimerText.select();
+            document.execCommand('copy');
+
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

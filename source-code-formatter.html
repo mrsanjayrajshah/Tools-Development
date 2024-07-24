@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Code Formatter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .heading {
+            background-color: #ff8a94;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #ff8a94;
+            border: none;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #ff6f7f;
+        }
+
+        .preview {
+            text-align: left;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Source Code Formatter</h1>
+        <form id="formatterForm">
+            <div class="form-group">
+                <label for="inputCode">Source Code:</label>
+                <textarea id="inputCode" name="inputCode" placeholder="Paste your source code here..." rows="10"></textarea>
+            </div>
+            <button type="button" id="formatButton">Format</button>
+            <button type="button" id="clearButton">Clear</button>
+            <div class="form-group">
+                <label for="outputCode">Formatted Code:</label>
+                <textarea id="outputCode" name="outputCode" readonly rows="10"></textarea>
+            </div>
+            <div id="outputPreview" class="preview">
+                <h3>Preview:</h3>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const formatButton = document.getElementById('formatButton');
+            const clearButton = document.getElementById('clearButton');
+            const inputCode = document.getElementById('inputCode');
+            const outputCode = document.getElementById('outputCode');
+            const outputPreview = document.getElementById('outputPreview');
+
+            formatButton.addEventListener('click', function() {
+                const code = inputCode.value;
+                const formattedCode = formatCode(code, 4);
+                outputCode.value = formattedCode;
+                outputPreview.innerHTML = formattedCode;
+            });
+
+            clearButton.addEventListener('click', function() {
+                inputCode.value = '';
+                outputCode.value = '';
+                outputPreview.innerHTML = '';
+            });
+
+            function formatCode(input, indent) {
+                let output = `<pre style="white-space: pre-wrap; font-family: monospace; font-size: 11pt; border: 1px dashed #999; line-height: 14pt; padding: 5px; overflow: auto; width: 100%;"><code>`;
+                let tab = ' '.repeat(indent);
+
+                for (let i = 0; i < input.length; i++) {
+                    const code = input.charCodeAt(i);
+                    switch (code) {
+                        case 9: // TAB
+                            output += tab;
+                            break;
+                        case 10: // LF
+                        case 13: // CR
+                            output += "\n";
+                            if (code === 13 && i + 1 < input.length && input.charCodeAt(i + 1) === 10) {
+                                i++;
+                            }
+                            break;
+                        case 34:
+                            output += "&quot;";
+                            break;
+                        case 38:
+                            output += "&amp;";
+                            break;
+                        case 60:
+                            output += "&lt;";
+                            break;
+                        case 62:
+                            output += "&gt;";
+                            break;
+                        case 124: // vertical pipe
+                            output += "&#124;";
+                            break;
+                        default:
+                            if (code >= 32 && code <= 127) {
+                                output += input.charAt(i);
+                            } else {
+                                output += `&#${code};`;
+                            }
+                            break;
+                    }
+                }
+                output += "</code></pre>";
+                return output;
+            }
+        });
+    </script>
+</body>
+</html>

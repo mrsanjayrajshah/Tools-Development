@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPA to Percentage & Percentage to GPA Calculator</title>
+  <style>
+    /* Reset default margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Container styling */
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    /* Header styling */
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    /* Form styling */
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Label styling */
+    label {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    /* Input styling */
+    input[type="number"], select {
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    /* Button styling */
+    button {
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button.reset {
+      background-color: #dc3545; /* Red color for reset button */
+      margin-right: auto; /* Pushes the button to the left */
+    }
+
+    button.convert {
+      background-color: #28a745; /* Green color for convert button */
+      margin-left: auto; /* Pushes the button to the right */
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Output styling */
+    output {
+      padding: 8px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* Notification styling */
+    .notification {
+      text-align: center;
+      background-color: #f44336; /* Red color for error notification */
+      color: white;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      display: none; /* Initially hidden */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GPA to Percentage & Percentage to GPA Calculator</h1>
+
+    <div class="notification" id="notification">
+      Invalid input! GPA should be between 0 and 4.0.
+    </div>
+
+    <form>
+      <label for="conversion-type">Select conversion type:</label>
+      <select id="conversion-type" name="conversion-type">
+        <option value="percentage-to-gpa">Percentage to GPA</option>
+        <option value="gpa-to-percentage">GPA to Percentage</option>
+      </select><br><br>
+      
+      <label for="grade">Enter grade:</label>
+      <input type="number" id="grade" name="grade" min="0" max="100" required><br><br>
+      
+      <div style="display: flex; justify-content: space-between;">
+        <button type="button" class="reset" onclick="resetForm()">Reset</button>
+        <button type="button" class="convert" onclick="convert()">Convert</button>
+      </div>
+      
+      <br><br>
+      
+      <label for="result">Result:</label>
+      <output type="text" id="result" name="result">0.0</output>
+    </form>
+  </div>
+
+  <script>
+    function convert() {
+      const conversionType = document.getElementById("conversion-type").value;
+      const grade = parseFloat(document.getElementById("grade").value);
+      let result;
+      
+      if (conversionType === "percentage-to-gpa") {
+        if (grade > 100 || grade < 0 || isNaN(grade)) {
+          displayNotification("Invalid input! Percentage should be between 0 and 100.");
+          return;
+        }
+        if (grade >= 90) {
+          result = 4.0;
+        } else if (grade >= 85) {
+          result = 3.7;
+        } else if (grade >= 75) {
+          result = 3.4;
+        } else if (grade >= 67.5) {
+          result = 3.0;
+        } else if (grade >= 60) {
+          result = 2.7;
+        } else if (grade >= 50) {
+          result = 2.3;
+        } else if (grade >= 45) {
+          result = 2.0;
+        } else {
+          result = 0.0;
+        }
+        
+        document.getElementById("result").value = result.toFixed(2);
+        hideNotification();
+        
+      } else if (conversionType === "gpa-to-percentage") {
+        if (grade > 4.0 || grade < 0 || isNaN(grade)) {
+          displayNotification("Invalid input! GPA should be between 0 and 4.0.");
+          return;
+        }
+        
+        result = grade * 25; // Using the formula: Percentage = GPA x 25
+        
+        document.getElementById("result").value = result.toFixed(2);
+        hideNotification();
+      }
+    }
+
+    function displayNotification(message) {
+      const notification = document.getElementById("notification");
+      notification.textContent = message;
+      notification.style.display = "block";
+    }
+
+    function hideNotification() {
+      const notification = document.getElementById("notification");
+      notification.style.display = "none";
+    }
+
+    function resetForm() {
+      document.getElementById("grade").value = "";
+      document.getElementById("result").value = "0.0";
+      hideNotification();
+    }
+  </script>
+</body>
+</html>

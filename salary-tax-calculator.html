@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Tax Calculator, Nepal</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+select, input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.column {
+    flex: 1;
+    background-color: #e6f0ff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    font-size: 18px;
+    color: #333;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.btn-left {
+    align-self: flex-start;
+}
+
+.btn-right {
+    align-self: flex-end;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-left, .btn-right {
+        align-self: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SALARY TAX CALCULATOR, NEPAL</h1>
+        <div class="row">
+            <div class="column">
+                <label for="employeeStatus">Nature of Employee</label>
+                <select id="employeeStatus">
+                    <option value="unmarried">Unmarried</option>
+                    <option value="married">Married</option>
+                </select>
+            </div>
+            <div class="column">
+                <label for="fiscalYear">Fiscal Year</label>
+                <select id="fiscalYear">
+                    <option value="2080/2081">2080/2081</option>
+                    <!-- Add other fiscal years as needed -->
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h2>Annual Income</h2>
+                <label for="monthlySalary">Monthly Salary</label>
+                <input type="number" id="monthlySalary" value="0">
+                <label for="numberOfMonths">No. of Months</label>
+                <input type="number" id="numberOfMonths" value="12">
+                <label for="bonus">Bonus</label>
+                <input type="number" id="bonus" value="0">
+                <label for="totalSalary">Total Salary</label>
+                <input type="number" id="totalSalary" value="0" readonly>
+            </div>
+            <div class="column">
+                <h2>Annual Deduction</h2>
+                <label for="ssf">Social Security Fund</label>
+                <input type="number" id="ssf" value="0">
+                <label for="epf">Employees Provident Fund</label>
+                <input type="number" id="epf" value="0">
+                <label for="cit">Citizen Investment Trust</label>
+                <input type="number" id="cit" value="0">
+                <label for="insurance">Insurance</label>
+                <input type="number" id="insurance" value="0">
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn-left" onclick="resetValues()">Reset values</button>
+            <button class="btn-right" onclick="calculateTax()">Calculate</button>
+        </div>
+        <div id="result">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
+    <script>
+        function resetValues() {
+    document.getElementById('monthlySalary').value = 0;
+    document.getElementById('numberOfMonths').value = 12;
+    document.getElementById('bonus').value = 0;
+    document.getElementById('totalSalary').value = 0;
+    document.getElementById('ssf').value = 0;
+    document.getElementById('epf').value = 0;
+    document.getElementById('cit').value = 0;
+    document.getElementById('insurance').value = 0;
+    document.getElementById('result').innerHTML = '';
+}
+
+function calculateTax() {
+    const monthlySalary = parseFloat(document.getElementById('monthlySalary').value);
+    const numberOfMonths = parseInt(document.getElementById('numberOfMonths').value);
+    const bonus = parseFloat(document.getElementById('bonus').value);
+    const totalSalary = (monthlySalary * numberOfMonths) + bonus;
+    document.getElementById('totalSalary').value = totalSalary;
+
+    const ssf = parseFloat(document.getElementById('ssf').value);
+    const epf = parseFloat(document.getElementById('epf').value);
+    const cit = parseFloat(document.getElementById('cit').value);
+    const insurance = parseFloat(document.getElementById('insurance').value);
+
+    const totalDeductions = ssf + epf + cit + insurance;
+    const taxableIncome = totalSalary - totalDeductions;
+
+    let tax = 0;
+    // Define tax slabs for Nepal 2080/2081
+    if (taxableIncome <= 500000) {
+        tax = taxableIncome * 0.01;
+    } else if (taxableIncome <= 700000) {
+        tax = (500000 * 0.01) + ((taxableIncome - 500000) * 0.10);
+    } else if (taxableIncome <= 2000000) {
+        tax = (500000 * 0.01) + (200000 * 0.10) + ((taxableIncome - 700000) * 0.20);
+    } else {
+        tax = (500000 * 0.01) + (200000 * 0.10) + (1300000 * 0.20) + ((taxableIncome - 2000000) * 0.30);
+    }
+
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `
+        <h2>Net Tax Liability:</h2>
+        <table>
+            <tr>
+                <th>Total Income (TI):</th>
+                <td>Rs. ${totalSalary.toFixed(2)}</td>
+            </tr>
+            <tr>
+                <th>Sum of SSF, EPF and CIT (SSF+EPF+CIT):</th>
+                <td>Rs. ${totalDeductions.toFixed(2)}</td>
+            </tr>
+            <tr>
+                <th>Insurance:</th>
+                <td>Rs. ${insurance.toFixed(2)}</td>
+            </tr>
+            <tr>
+                <th>Total Deduction (TD):</th>
+                <td>Rs. ${totalDeductions.toFixed(2)}</td>
+            </tr>
+            <tr>
+                <th>Net Assessable (TI-TD):</th>
+                <td>Rs. ${taxableIncome.toFixed(2)}</td>
+            </tr>
+        </table>
+        <h3>Tax Details:</h3>
+        <table>
+            <tr>
+                <th>Assessable Income (Rs.)</th>
+                <th>Rate (%)</th>
+                <th>Tax Liability (Rs.)</th>
+            </tr>
+            <tr>
+                <td>Rs. ${taxableIncome.toFixed(2)}</td>
+                <td>1.00</td>
+                <td>Rs. ${tax.toFixed(2)}</td>
+            </tr>
+        </table>
+        <p><strong>Net Tax Liability (Monthly):</strong> Rs. ${(tax / 12).toFixed(2)}</p>
+        <p><strong>Net Tax Liability (Yearly):</strong> Rs. ${tax.toFixed(2)}</p>
+    `;
+}
+
+    </script>
+</body>
+</html>

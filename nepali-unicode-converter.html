@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Unicode Converter</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nepali Unicode Converter</h1>
+        <textarea id="inputText" placeholder="Enter Romanized Nepali text here..."></textarea>
+        <button id="convertButton">Convert</button>
+        <textarea id="outputText" placeholder="Converted Nepali text will appear here..." readonly></textarea>
+    </div>
+    <script>
+        class State {
+    constructor(remaining, consumed, processed, as_is = false) {
+        this.remaining = remaining;
+        this.consumed = consumed;
+        this.processed = processed;
+        this.as_is = as_is;
+    }
+
+    copy(update = {}) {
+        return new State(
+            update.remaining || this.remaining,
+            update.consumed || this.consumed,
+            update.processed || this.processed,
+            update.as_is !== undefined ? update.as_is : this.as_is
+        );
+    }
+}
+
+class Converter {
+    constructor() {
+        this.mappings = getMappings();
+        this.wordMaps = getWordMaps();
+    }
+
+    consume(state) {
+        const current = state.remaining;
+        const consumed = state.consumed;
+        const processed = state.processed;
+
+        if (state.as_is && current[0] === '}') {
+            return new State(current.slice(1), consumed + current[0], processed, false);
+        }
+        if (state.as_is && current[0] !== '}') {
+            return new State(current.slice(1), consumed + current[0], processed + current[0], true);
+        }
+
+        if (current.startsWith('{{')) {
+            return new State(current.slice(2), consumed + current.slice(0, 2), processed + '{');
+        }
+        if (current.startsWith('{') && !state.as_is) {
+            return new State(current.slice(1), consumed + current[0], processed, true);
+        }
+
+        for (const [k, v] of Object.entries(this.wordMaps)) {
+            if (current.startsWith(k)) {
+                return new State(current.slice(k.length), consumed + k, processed + v);
+            }
+        }
+
+        if (current.startsWith('M')) {
+            return new State(current.slice(1), consumed + current[0], processed + amkaar);
+        }
+        if (current.startsWith('NN')) {
+            return new State(current.slice(2), consumed + current.slice(0, 2), processed + aNNkaar);
+        }
+
+        if (current.startsWith('RI') && consumed[consumed.length - 1] !== 'a') {
+            return new State(current.slice(2), consumed + current.slice(0, 2), processed.slice(0, -1) + Ri);
+        }
+        if (current.startsWith('RI') && consumed[consumed.length - 1] === 'a') {
+            return new State(current.slice(2), consumed + current.slice(0, 2), processed + Ri);
+        }
+
+        for (const [k, v] of Object.entries(this.mappings)) {
+            if (current.startsWith(k)) {
+                return new State(current.slice(k.length), consumed + k, processed + v);
+            }
+        }
+
+        return new State(current.slice(1), consumed + current[0], processed + current[0]);
+    }
+
+    convert(text) {
+        if (!text) return text;
+        let state = new State(text, '', '');
+        while (state.remaining) {
+            state = this.consume(state);
+        }
+        return state.processed;
+    }
+}
+
+const numbers = {
+    '0': '०', '1': '१', '2': '२', '3': '३', '4': '४',
+    '5': '५', '6': '६', '7': '७', '8': '८', '9': '९'
+};
+
+const basicVowels = {
+    'a': 'अ', 'aa': 'आ', 'ee': 'ई', 'i': 'इ', 'u': 'उ',
+    'oo': 'ऊ', 'Ri': 'ॠ', 'Ree': 'ॠ', 'e': 'ए', 'ai': 'ऐ', 'o': 'ओ'
+};
+
+const consonantKaars = {
+    'aa': 'ा', 'e': 'े', 'ee': 'ी', 'i': 'ि', 'u': 'ु',
+    'oo': 'ू', 'o': 'ो', 'au': 'ौ', 'ai': 'ै'
+};
+
+const akaars = {
+    'ka': 'क', 'kha': 'ख', 'ga': 'ग', 'gha': 'घ', 'Nga': 'ङ',
+    'NGa': 'ङ्ग', 'cha': 'च', 'chha': 'छ', 'ja': 'ज', 'jha': 'झ',
+    'yNa': 'ञ', 'Ta': 'ट', 'Tha': 'ठ', 'Da': 'ड', 'Dha': 'ढ',
+    'Na': 'ण', 'ta': 'त', 'tha': 'थ', 'da': 'द', 'dha': 'ध',
+    'na': 'न', 'nga': 'ङ', 'pa': 'प', 'pha': 'फ', 'fa': 'फ',
+    'ba': 'ब', 'bha': 'भ', 'va': 'भ', 'ma': 'म', 'ya': 'य',
+    'ra': 'र', 'la': 'ल', 'wa': 'व', 'sa': 'स', 'sha': 'श',
+    'Sha': 'ष', 'ha': 'ह', 'ksha': 'क्ष', 'tra': 'त्र', 'gya': 'ज्ञ', 'gYa': 'ग्य'
+};
+
+const halanta = '्';
+const amkaar = 'ं';
+const aNNkaar = 'ँ';
+const Ri = 'ृ';
+
+function getMappings() {
+    const allMappings = { ...basicVowels, ...akaars };
+
+    const halantas = Object.fromEntries(
+        Object.entries(akaars).map(([k, v]) => [k.slice(0, -1), v + halanta])
+    );
+
+    Object.assign(allMappings, halantas);
+
+    let currKeyCounts = Object.keys(allMappings).length;
+    for (const [rom, sym] of Object.entries(consonantKaars)) {
+        const kaarMaps = Object.fromEntries(
+            Object.entries(halantas).map(([k, v]) => [k + rom, akaars[k + 'a'] + sym])
+        );
+        Object.assign(allMappings, kaarMaps);
+        currKeyCounts += Object.keys(halantas).length;
+    }
+
+    allMappings['.'] = '।';
+    Object.assign(allMappings, numbers);
+    return Object.fromEntries(Object.entries(allMappings).sort((a, b) => b[0].length - a[0].length));
+}
+
+function getWordMaps() {
+    return {
+        'call': 'कल', 'telecom': 'टेलिकम', 'plan': 'प्लान', 'sms': 'एसएमएस',
+        'SMS': 'एसएमएस', 'aum': 'ॐ', 'hudai': 'हुँदै', 'kathmandu': 'काठमाडौं',
+        'Kathmandu': 'काठमाडौं', 'bibek': 'विवेक', 'vivek': 'विवेक', 'pandey': 'पाण्डे',
+        'facebook': 'फेसबुक', 'twitter': 'ट्विटर', 'instagram': 'इन्स्टाग्राम',
+        'messenger': 'मेसेन्जर', 'laptop': 'ल्याप्टप', 'phone': 'फोन', 'code': 'कोड',
+        'google': 'गूगल', 'message': 'मेसेज', 'hola': 'होला', 'gas': 'ग्यास',
+        'garage': 'ग्यारेज', 'radio': 'रेडियो', 'cool': 'कूल', 'fun': 'फन',
+        'number': 'नम्बर'
+    };
+}
+
+document.getElementById('convertButton').addEventListener('click', () => {
+    const inputText = document.getElementById('inputText').value;
+    const converter = new Converter();
+    const outputText = converter.convert(inputText);
+    document.getElementById('outputText').value = outputText;
+});
+
+    </script>
+</body>
+</html>

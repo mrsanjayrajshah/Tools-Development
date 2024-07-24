@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+}
+
+.heading {
+    background-color: #1da1f2;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus, textarea:focus {
+    border-color: #1da1f2;
+    box-shadow: 0 0 5px rgba(29, 161, 242, 0.5);
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    background-color: #1da1f2;
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 48%;
+}
+
+button:hover {
+    background-color: #0d95e8;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">BMI Calculator</h1>
+        <form id="bmiForm">
+            <div class="form-group">
+                <label for="weight">Your Weight (kg):</label>
+                <input type="text" id="weight" name="weight" required>
+            </div>
+            <div class="form-group">
+                <label for="height">Your Height (cm):</label>
+                <input type="text" id="height" name="height" required>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="calculateBmi()">Calculate BMI</button>
+                <button type="reset">Reset</button>
+            </div>
+            <div class="form-group">
+                <label for="bmi">Your BMI:</label>
+                <input type="text" id="bmi" name="bmi" readonly>
+            </div>
+            <div class="form-group">
+                <label for="meaning">This Means:</label>
+                <input type="text" id="meaning" name="meaning" readonly>
+            </div>
+        </form>
+    </div>
+    <script>
+    function calculateBmi() {
+    const weight = document.getElementById('weight').value;
+    const height = document.getElementById('height').value;
+
+    if (weight > 0 && height > 0) {
+        const finalBmi = weight / ((height / 100) * (height / 100));
+        document.getElementById('bmi').value = finalBmi.toFixed(2);
+
+        if (finalBmi < 18.5) {
+            document.getElementById('meaning').value = "You are too thin.";
+        } else if (finalBmi >= 18.5 && finalBmi < 25) {
+            document.getElementById('meaning').value = "You are healthy.";
+        } else {
+            document.getElementById('meaning').value = "You are overweight.";
+        }
+    } else {
+        alert("Please enter valid values for weight and height.");
+    }
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="csrf-token"
+      content="6R9v3TxkiBJAQZTCb6eGr0aRVlWRBNZq56KmlglQ"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>Nepal Bank | Calculators</title>
+    <meta
+      name="description"
+      content="Nepal Bank Limited (NBL) , the first bank of Nepal proudly holds the glory of marking the formal beginning of banking system in Nepal. Nepal Bank Limited was established as FIRST bank of Nepal on Kartik 30, 1994 (November 15, 1937 A.D.) under Nepal Bank Act 1937. The bank was established with an authorized capital of Rs.10 million, issued capital of Rs.2.5 million and paid up capital of Rs.0.842 million. The share held by government and private sector was 60% and 40% respectively."
+    />
+    <link rel="canonical" href="https://nepalbank.com.np" />
+   
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/bootstrap/css/bootstrap.css"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/bootstrap/icons/font/bootstrap-icons.css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/css/animate.min.css?1890928595"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/css/plugins.css?602720759"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/main.css?974552483"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/css/wowanimate.css"
+    />
+    
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/jquery-ui-1.12.1/jquery-ui.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/css/dataTables.bootstrap5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/css/lightbox.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/css/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/fontawesome-free-5.15.3-web/css/all.css"
+    />
+  
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/css/emiculator.css"
+    />
+    <style>
+      .justify-content-center {
+        justify-content: space-between !important;
+      }
+
+      .text-md-right {
+        text-align: right !important;
+      }
+
+      .emi-cal-results.text-md-right > div {
+        border-bottom: 1px solid #dddddd;
+        margin-bottom: 1rem;
+      }
+
+      .input-group-text {
+        height: 2.9rem;
+        padding: 1rem;
+      }
+    </style>
+    <style>
+      .inner-content {
+  border-top: 1px solid #ccc;
+  padding: 2rem 2rem 3rem 2rem;
+  padding-bottom: 7rem;
+  min-height: 40rem;
+    </style>
+  </head>
+  <body>
+    
+    
+    <section class="content-pd inner-content">
+      <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="https://www.nepalbank.com.np">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              EMI Calculator
+            </li>
+          </ol>
+        </nav>
+
+        <h1>EMI Calculator</h1>
+        <div class="emic-calculator" id="emic-calculator-1719373073651">
+          <h2>EMI Calculator for Loans</h2>
+          <div
+            class="row d-flex flex-row justify-content-center align-items-center emiculator-widget"
+          >
+            <div class="emi-calc-container col-md-4">
+              <p class="text-danger validation-alert" style="display: none"></p>
+              <label for="emi-principal">Your Loan Amount is </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">NPR</span>
+                </div>
+                <input
+                  type="number"
+                  class="form-control js-emic-var emi-principal"
+                  data-emic-id="emi-principal"
+                  value="100000"
+                  min="0"
+                  max="100000000000000"
+                />
+              </div>
+              <label for="emi-rate">Loan Rate</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">%</span>
+                </div>
+                <input
+                  type="number"
+                  class="form-control js-emic-var emi-rate"
+                  data-emic-id="emi-rate"
+                  value="8.5"
+                  min="0"
+                  max="20"
+                />
+              </div>
+              <div class="form-group">
+                <label for="emi-time">Loan Tenure</label>
+                <input
+                  type="number"
+                  class="form-control js-emic-var js-time-type emi-time"
+                  data-emic-id="emi-time"
+                  value="120"
+                  min="0"
+                  max="360"
+                />
+              </div>
+              <div class="form-group">
+                <div
+                  class="custom-control custom-radio d-inline-block my-1 mr-sm-2"
+                >
+                  <input
+                    type="radio"
+                    class="custom-control-input js-emic-radio-var js-time-type"
+                    name="emi-time-type-emic-calculator-1719373073651"
+                    value="months"
+                    data-emic-id="emi-time-type-months"
+                    checked=""
+                    id="emic-radio-months-emic-calculator-1719373073651"
+                  />
+                  <label
+                    class="custom-control-label"
+                    for="emic-radio-months-emic-calculator-1719373073651"
+                    >Months</label
+                  >
+                </div>
+                <div
+                  class="custom-control custom-radio d-inline-block my-1 mr-sm-2"
+                >
+                  <input
+                    type="radio"
+                    id="emic-radio-years-emic-calculator-1719373073651"
+                    class="custom-control-input d-inline-block js-emic-radio-var js-time-type"
+                    name="emi-time-type-emic-calculator-1719373073651"
+                    value="years"
+                    data-emic-id="emi-time-type-years"
+                  />
+                  <label
+                    class="custom-control-label"
+                    for="emic-radio-years-emic-calculator-1719373073651"
+                    >Years</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="emi-cal-results-container col-md-3">
+              <div class="emi-cal-results text-md-right">
+                <div class="">
+                  <h6>Loan EMI</h6>
+                  <h3 class="emi-monthly" data-emic-id="emi-payment">
+                    NPR 1239.86
+                  </h3>
+                </div>
+                <div class="">
+                  <h6>Total Interest Payable</h6>
+                  <h3
+                    class="emi-total-interest"
+                    data-emic-id="emi-total-interest"
+                  >
+                    NPR 48783.20
+                  </h3>
+                </div>
+                <div class="">
+                  <h6>Total Payment</h6>
+                  <h3
+                    class="emi-total-payment"
+                    data-emic-id="emi-total-payment"
+                  >
+                    NPR 148783.20
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="emi-chart emi-chart-container col-md-4">
+              <div class="chartjs-size-monitor">
+                <div class="chartjs-size-monitor-expand">
+                  <div class=""></div>
+                </div>
+                <div class="chartjs-size-monitor-shrink">
+                  <div class=""></div>
+                </div>
+              </div>
+              <canvas
+                id="emic-calculator-1719373073651-emi-chart"
+                width="738"
+                height="738"
+                style="display: block; height: 369px; width: 369px"
+                class="chartjs-render-monitor"
+              ></canvas>
+            </div>
+            <div class="emi-table-container col-md-12">
+              <h4>
+                Monthly breakdown of EMI in <b>Principal</b> and
+                <b>Interest</b> components
+              </h4>
+              <div class="breakdown-table-container">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <th>Principal</th>
+                      <th class="text-center">Interest</th>
+                      <th class="text-right">Balance</th>
+                    </tr>
+                    <tr>
+                      <td>NPR 532</td>
+                      <td class="text-center">NPR 708</td>
+                      <td class="text-right">NPR 99468</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 535</td>
+                      <td class="text-center">NPR 705</td>
+                      <td class="text-right">NPR 98933</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 539</td>
+                      <td class="text-center">NPR 701</td>
+                      <td class="text-right">NPR 98394</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 543</td>
+                      <td class="text-center">NPR 697</td>
+                      <td class="text-right">NPR 97851</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 547</td>
+                      <td class="text-center">NPR 693</td>
+                      <td class="text-right">NPR 97304</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 551</td>
+                      <td class="text-center">NPR 689</td>
+                      <td class="text-right">NPR 96754</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 555</td>
+                      <td class="text-center">NPR 685</td>
+                      <td class="text-right">NPR 96199</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 558</td>
+                      <td class="text-center">NPR 681</td>
+                      <td class="text-right">NPR 95641</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 562</td>
+                      <td class="text-center">NPR 677</td>
+                      <td class="text-right">NPR 95078</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 566</td>
+                      <td class="text-center">NPR 673</td>
+                      <td class="text-right">NPR 94512</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 570</td>
+                      <td class="text-center">NPR 669</td>
+                      <td class="text-right">NPR 93942</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 574</td>
+                      <td class="text-center">NPR 665</td>
+                      <td class="text-right">NPR 93367</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 579</td>
+                      <td class="text-center">NPR 661</td>
+                      <td class="text-right">NPR 92789</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 583</td>
+                      <td class="text-center">NPR 657</td>
+                      <td class="text-right">NPR 92206</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 587</td>
+                      <td class="text-center">NPR 653</td>
+                      <td class="text-right">NPR 91619</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 591</td>
+                      <td class="text-center">NPR 649</td>
+                      <td class="text-right">NPR 91028</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 595</td>
+                      <td class="text-center">NPR 645</td>
+                      <td class="text-right">NPR 90433</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 599</td>
+                      <td class="text-center">NPR 641</td>
+                      <td class="text-right">NPR 89834</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 604</td>
+                      <td class="text-center">NPR 636</td>
+                      <td class="text-right">NPR 89231</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 608</td>
+                      <td class="text-center">NPR 632</td>
+                      <td class="text-right">NPR 88623</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 612</td>
+                      <td class="text-center">NPR 628</td>
+                      <td class="text-right">NPR 88011</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 616</td>
+                      <td class="text-center">NPR 623</td>
+                      <td class="text-right">NPR 87394</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 621</td>
+                      <td class="text-center">NPR 619</td>
+                      <td class="text-right">NPR 86773</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 625</td>
+                      <td class="text-center">NPR 615</td>
+                      <td class="text-right">NPR 86148</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 630</td>
+                      <td class="text-center">NPR 610</td>
+                      <td class="text-right">NPR 85519</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 634</td>
+                      <td class="text-center">NPR 606</td>
+                      <td class="text-right">NPR 84884</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 639</td>
+                      <td class="text-center">NPR 601</td>
+                      <td class="text-right">NPR 84246</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 643</td>
+                      <td class="text-center">NPR 597</td>
+                      <td class="text-right">NPR 83603</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 648</td>
+                      <td class="text-center">NPR 592</td>
+                      <td class="text-right">NPR 82955</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 652</td>
+                      <td class="text-center">NPR 588</td>
+                      <td class="text-right">NPR 82303</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 657</td>
+                      <td class="text-center">NPR 583</td>
+                      <td class="text-right">NPR 81646</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 662</td>
+                      <td class="text-center">NPR 578</td>
+                      <td class="text-right">NPR 80984</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 666</td>
+                      <td class="text-center">NPR 574</td>
+                      <td class="text-right">NPR 80318</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 671</td>
+                      <td class="text-center">NPR 569</td>
+                      <td class="text-right">NPR 79647</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 676</td>
+                      <td class="text-center">NPR 564</td>
+                      <td class="text-right">NPR 78972</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 680</td>
+                      <td class="text-center">NPR 559</td>
+                      <td class="text-right">NPR 78291</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 685</td>
+                      <td class="text-center">NPR 555</td>
+                      <td class="text-right">NPR 77606</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 690</td>
+                      <td class="text-center">NPR 550</td>
+                      <td class="text-right">NPR 76916</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 695</td>
+                      <td class="text-center">NPR 545</td>
+                      <td class="text-right">NPR 76221</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 700</td>
+                      <td class="text-center">NPR 540</td>
+                      <td class="text-right">NPR 75521</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 705</td>
+                      <td class="text-center">NPR 535</td>
+                      <td class="text-right">NPR 74816</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 710</td>
+                      <td class="text-center">NPR 530</td>
+                      <td class="text-right">NPR 74106</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 715</td>
+                      <td class="text-center">NPR 525</td>
+                      <td class="text-right">NPR 73391</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 720</td>
+                      <td class="text-center">NPR 520</td>
+                      <td class="text-right">NPR 72671</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 725</td>
+                      <td class="text-center">NPR 515</td>
+                      <td class="text-right">NPR 71946</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 730</td>
+                      <td class="text-center">NPR 510</td>
+                      <td class="text-right">NPR 71215</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 735</td>
+                      <td class="text-center">NPR 504</td>
+                      <td class="text-right">NPR 70480</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 741</td>
+                      <td class="text-center">NPR 499</td>
+                      <td class="text-right">NPR 69739</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 746</td>
+                      <td class="text-center">NPR 494</td>
+                      <td class="text-right">NPR 68994</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 751</td>
+                      <td class="text-center">NPR 489</td>
+                      <td class="text-right">NPR 68242</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 756</td>
+                      <td class="text-center">NPR 483</td>
+                      <td class="text-right">NPR 67486</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 762</td>
+                      <td class="text-center">NPR 478</td>
+                      <td class="text-right">NPR 66724</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 767</td>
+                      <td class="text-center">NPR 473</td>
+                      <td class="text-right">NPR 65957</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 773</td>
+                      <td class="text-center">NPR 467</td>
+                      <td class="text-right">NPR 65184</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 778</td>
+                      <td class="text-center">NPR 462</td>
+                      <td class="text-right">NPR 64406</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 784</td>
+                      <td class="text-center">NPR 456</td>
+                      <td class="text-right">NPR 63622</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 789</td>
+                      <td class="text-center">NPR 451</td>
+                      <td class="text-right">NPR 62833</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 795</td>
+                      <td class="text-center">NPR 445</td>
+                      <td class="text-right">NPR 62038</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 800</td>
+                      <td class="text-center">NPR 439</td>
+                      <td class="text-right">NPR 61238</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 806</td>
+                      <td class="text-center">NPR 434</td>
+                      <td class="text-right">NPR 60432</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 812</td>
+                      <td class="text-center">NPR 428</td>
+                      <td class="text-right">NPR 59620</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 818</td>
+                      <td class="text-center">NPR 422</td>
+                      <td class="text-right">NPR 58803</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 823</td>
+                      <td class="text-center">NPR 417</td>
+                      <td class="text-right">NPR 57979</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 829</td>
+                      <td class="text-center">NPR 411</td>
+                      <td class="text-right">NPR 57150</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 835</td>
+                      <td class="text-center">NPR 405</td>
+                      <td class="text-right">NPR 56315</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 841</td>
+                      <td class="text-center">NPR 399</td>
+                      <td class="text-right">NPR 55474</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 847</td>
+                      <td class="text-center">NPR 393</td>
+                      <td class="text-right">NPR 54627</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 853</td>
+                      <td class="text-center">NPR 387</td>
+                      <td class="text-right">NPR 53774</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 859</td>
+                      <td class="text-center">NPR 381</td>
+                      <td class="text-right">NPR 52915</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 865</td>
+                      <td class="text-center">NPR 375</td>
+                      <td class="text-right">NPR 52050</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 871</td>
+                      <td class="text-center">NPR 369</td>
+                      <td class="text-right">NPR 51179</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 877</td>
+                      <td class="text-center">NPR 363</td>
+                      <td class="text-right">NPR 50302</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 884</td>
+                      <td class="text-center">NPR 356</td>
+                      <td class="text-right">NPR 49418</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 890</td>
+                      <td class="text-center">NPR 350</td>
+                      <td class="text-right">NPR 48528</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 896</td>
+                      <td class="text-center">NPR 344</td>
+                      <td class="text-right">NPR 47632</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 902</td>
+                      <td class="text-center">NPR 337</td>
+                      <td class="text-right">NPR 46730</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 909</td>
+                      <td class="text-center">NPR 331</td>
+                      <td class="text-right">NPR 45821</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 915</td>
+                      <td class="text-center">NPR 325</td>
+                      <td class="text-right">NPR 44906</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 922</td>
+                      <td class="text-center">NPR 318</td>
+                      <td class="text-right">NPR 43984</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 928</td>
+                      <td class="text-center">NPR 312</td>
+                      <td class="text-right">NPR 43055</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 935</td>
+                      <td class="text-center">NPR 305</td>
+                      <td class="text-right">NPR 42121</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 942</td>
+                      <td class="text-center">NPR 298</td>
+                      <td class="text-right">NPR 41179</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 948</td>
+                      <td class="text-center">NPR 292</td>
+                      <td class="text-right">NPR 40231</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 955</td>
+                      <td class="text-center">NPR 285</td>
+                      <td class="text-right">NPR 39276</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 962</td>
+                      <td class="text-center">NPR 278</td>
+                      <td class="text-right">NPR 38314</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 968</td>
+                      <td class="text-center">NPR 271</td>
+                      <td class="text-right">NPR 37346</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 975</td>
+                      <td class="text-center">NPR 265</td>
+                      <td class="text-right">NPR 36371</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 982</td>
+                      <td class="text-center">NPR 258</td>
+                      <td class="text-right">NPR 35388</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 989</td>
+                      <td class="text-center">NPR 251</td>
+                      <td class="text-right">NPR 34399</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 996</td>
+                      <td class="text-center">NPR 244</td>
+                      <td class="text-right">NPR 33403</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1003</td>
+                      <td class="text-center">NPR 237</td>
+                      <td class="text-right">NPR 32400</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1010</td>
+                      <td class="text-center">NPR 230</td>
+                      <td class="text-right">NPR 31389</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1018</td>
+                      <td class="text-center">NPR 222</td>
+                      <td class="text-right">NPR 30372</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1025</td>
+                      <td class="text-center">NPR 215</td>
+                      <td class="text-right">NPR 29347</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1032</td>
+                      <td class="text-center">NPR 208</td>
+                      <td class="text-right">NPR 28315</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1039</td>
+                      <td class="text-center">NPR 201</td>
+                      <td class="text-right">NPR 27276</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1047</td>
+                      <td class="text-center">NPR 193</td>
+                      <td class="text-right">NPR 26229</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1054</td>
+                      <td class="text-center">NPR 186</td>
+                      <td class="text-right">NPR 25175</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1062</td>
+                      <td class="text-center">NPR 178</td>
+                      <td class="text-right">NPR 24113</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1069</td>
+                      <td class="text-center">NPR 171</td>
+                      <td class="text-right">NPR 23044</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1077</td>
+                      <td class="text-center">NPR 163</td>
+                      <td class="text-right">NPR 21968</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1084</td>
+                      <td class="text-center">NPR 156</td>
+                      <td class="text-right">NPR 20884</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1092</td>
+                      <td class="text-center">NPR 148</td>
+                      <td class="text-right">NPR 19792</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1100</td>
+                      <td class="text-center">NPR 140</td>
+                      <td class="text-right">NPR 18692</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1107</td>
+                      <td class="text-center">NPR 132</td>
+                      <td class="text-right">NPR 17584</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1115</td>
+                      <td class="text-center">NPR 125</td>
+                      <td class="text-right">NPR 16469</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1123</td>
+                      <td class="text-center">NPR 117</td>
+                      <td class="text-right">NPR 15346</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1131</td>
+                      <td class="text-center">NPR 109</td>
+                      <td class="text-right">NPR 14215</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1139</td>
+                      <td class="text-center">NPR 101</td>
+                      <td class="text-right">NPR 13076</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1147</td>
+                      <td class="text-center">NPR 93</td>
+                      <td class="text-right">NPR 11928</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1155</td>
+                      <td class="text-center">NPR 84</td>
+                      <td class="text-right">NPR 10773</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1164</td>
+                      <td class="text-center">NPR 76</td>
+                      <td class="text-right">NPR 9609</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1172</td>
+                      <td class="text-center">NPR 68</td>
+                      <td class="text-right">NPR 8438</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1180</td>
+                      <td class="text-center">NPR 60</td>
+                      <td class="text-right">NPR 7258</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1188</td>
+                      <td class="text-center">NPR 51</td>
+                      <td class="text-right">NPR 6069</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1197</td>
+                      <td class="text-center">NPR 43</td>
+                      <td class="text-right">NPR 4872</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1205</td>
+                      <td class="text-center">NPR 35</td>
+                      <td class="text-right">NPR 3667</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1214</td>
+                      <td class="text-center">NPR 26</td>
+                      <td class="text-right">NPR 2453</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1222</td>
+                      <td class="text-center">NPR 17</td>
+                      <td class="text-right">NPR 1231</td>
+                    </tr>
+                    <tr>
+                      <td>NPR 1231</td>
+                      <td class="text-center">NPR 9</td>
+                      <td class="text-right">NPR 0</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    >
+    </script>
+    <script src="https://www.nepalbank.com.np/frontend/js/jquery-3.5.1.min.js"></script>
+    <script src="https://www.nepalbank.com.np/frontend/js/popper.min.js"></script>
+    <script src="https://www.nepalbank.com.np/frontend/bootstrap/js/bootstrap.min.js"></script>
+    
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/css/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.nepalbank.com.np/frontend/fontawesome-free-5.15.3-web/css/all.css"
+    />
+    
+    /* <script src="https://www.nepalbank.com.np/frontend/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="https://www.nepalbank.com.np/frontend/js/jquery.validate.min.js"></script>
+    <script src="https://www.nepalbank.com.np/frontend/js/jquery.dataTables.min.js"></script>
+    <script src="https://www.nepalbank.com.np/frontend/js/dataTables.bootstrap5.min.js"></script> */
+    /* <script src="https://www.nepalbank.com.np/frontend/js/jquery.emiculator.min.js"></script> */
+
+    <script>
+        
+"use strict";
+
+(function ($) {
+  $.fn.emiculator = function (options, callback) {
+
+
+    /*
+     * draws table with monthly breakdown of principal and interest
+     */
+    function drawComponentsTable(data_obj, init_options) {
+
+      var settings = init_options.settings;
+      var baseEl = init_options.baseEl;
+      var emi_data = data_obj.data_obj;
+      var heading = '<h4>' + settings.language.BREAKDOWN_TABLE_HEADING + '</h4>';
+      var table = "<div class='breakdown-table-container'><table class='table table-striped'><tr><th>Principal</th><th class='text-center'>Interest</th><th  class='text-right'>Balance</th></tr>"
+      var precision = settings.precision;
+      $(emi_data).each(function () {
+        table += "<tr>";
+        table += "<td>" + settings.currency + " " + Math.round(this[0].toFixed(precision)) + "</td>";
+        table += "<td class='text-center'>" + settings.currency + " " + Math.round(this[1].toFixed(precision)) + "</td>";
+
+        table += "<td class='text-right'>" + settings.currency + " " + Math.round(this[2].toFixed(precision)) + "</td>";
+        table += "</tr>";
+
+      })
+
+      table += "</table></div>";
+      $(baseEl + " .emi-table-container").html(heading + table);
+    }
+
+    /*
+     * update the results inside the html layout 
+     */
+    function updateDataInHTML(data, init_options) {
+
+      var settings = init_options.settings;
+      var baseEl = init_options.baseEl;
+      $(baseEl + " .emi-monthly").html(settings.currency + " " + data.emi);
+      $(baseEl + " .emi-total-interest").html(settings.currency + " " + data.total_interest);
+      $(baseEl + " .emi-total-payment").html(settings.currency + " " + data.total_payment);
+      return true;
+
+    }
+
+
+    /*
+     * draws dough nut chart for showing interest and principal components 
+     */
+
+    function drawChart(data_obj, init_options) {
+
+      var settings = init_options.settings;
+      var baseEl = init_options.baseEl;
+      var uniqId = init_options.uniqId;
+
+      $(baseEl + " .emi-chart-container").addClass("col-md-4");
+      if (typeof Chart == "undefined") {
+        $(baseEl + " .emi-chart").html("<div class='alert text-danger'>For showing charts the widget uses <a href='https://www.chartjs.org' target='_blank'>Chart.js</a>. Please load the Chart.js. See documentation for options</div>");
+        return false;
+      }
+
+
+      //remove old chart
+      $("canvas#" + uniqId + "-emi-chart").remove();
+
+
+      $(baseEl + " .emi-chart").html('<canvas id="' + uniqId + '-emi-chart" width="240" height="240"></canvas>');
+      var ctx = $("#" + uniqId + "-emi-chart");
+
+      var data = {
+        datasets: [{
+          data: [data_obj.total_interest, data_obj.principal],
+          backgroundColor: settings.backgroundColor,
+          hoverBackgroundColor: settings.hoverBackgroundColor,
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+          'Total Interest',
+          'Prinicpal Loan Amount',
+        ],
+
+      };
+      var options = new Array();
+
+      var myPieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: options
+      });
+    }
+
+    /*
+     * draws the complete calculator html markup layout
+     */
+
+    function drawCalcForm(init_options) {
+      var settings = init_options.settings;
+      var baseEl = init_options.baseEl;
+      var uniqId = init_options.uniqId;
+
+
+      var html = '   <h2>' + settings.language.CALCULATOR_HEADING + '</h2>   ' +
+        '                         <div class="row d-flex flex-row justify-content-center align-items-center  ' +
+        '                         emiculator-widget">  ' +
+        '                            <div class="emi-calc-container col-md-4">    ' +
+        '                             <p class="text-danger  validation-alert" ></p>    ' +
+        '                                     <label  for="emi-principal">' + settings.language.LABEL_PRINICIPAL + '</label>  ' +
+        '                                     <div class="input-group mb-3">  ' +
+        '     ' +
+        '                                       <div class="input-group-prepend">  ' +
+        '                                         <span class="input-group-text"  >' + settings.currency + '</span>  ' +
+        '                                       </div>   ' +
+        '                                       <input type="number" class="form-control js-emic-var emi-principal" data-emic-id="emi-principal" value="' + settings.initPrincipal + '"min="0"  max="' + settings.maxPrincipal + '">   ' +
+        '                                     </div>  ' +
+        '                                      <label  for="emi-rate">' + settings.language.LABEL_RATE + '</label>  ' +
+        '                                     <div class="input-group mb-3">  ' +
+        '                                        ' +
+        '                                       <div class="input-group-prepend">  ' +
+        '                                         <span class="input-group-text"  >%</span>  ' +
+        '                                       </div>   ' +
+        '                                       <input type="number" class="form-control js-emic-var emi-rate"  data-emic-id="emi-rate" value="' + settings.initRate + '" min="0" max="' + settings.maxRate + '">  ' +
+        '                                          ' +
+        '                                     </div>  ' +
+        '                                     <div class="form-group">   ' +
+        '                                       <label  for="emi-time">' + settings.language.LABEL_TIME + '</label>  ' +
+        '                                       <input type="number" class="form-control js-emic-var js-time-type emi-time"  data-emic-id="emi-time" value="' + settings.initTime + '" min="0" max="' + settings.maxTime + '">    ' +
+        '                                     </div>  ' +
+        '                                        ' +
+        '                                    <div class="form-group">   ' +
+        '                                      <div class="custom-control custom-radio d-inline-block my-1 mr-sm-2">  ' +
+        '                                         <input type="radio" class="custom-control-input js-emic-radio-var js-time-type"  name="emi-time-type-' + uniqId + '"  value="months" data-emic-id="emi-time-type-months" checked id="emic-radio-months-' + uniqId + '">   ' +
+        '                                         <label class="custom-control-label" for="emic-radio-months-' + uniqId + '">Months</label>  ' +
+        '                                       </div>   ' +
+        '                                       <div class="custom-control custom-radio d-inline-block my-1 mr-sm-2">  ' +
+        '                                         <input type="radio" id="emic-radio-years-' + uniqId + '"  class="custom-control-input  d-inline-block js-emic-radio-var js-time-type"   name="emi-time-type-' + uniqId + '" value="years" data-emic-id="emi-time-type-years">   ' +
+        '                                         <label class="custom-control-label" for="emic-radio-years-' + uniqId + '">Years</label>  ' +
+        '                                       </div>   ' +
+        '                                    </div>     ' +
+        '                            </div>   ' +
+        '                            <div class="emi-cal-results-container col-md-3">  ' +
+        '                               <div class="emi-cal-results text-md-right">  ' +
+        '                                  <div class=""><h6>' + settings.language.RESULTS_EMI_HEADING + '</h6>  ' +
+        '                                     <h3 class="emi-monthly" data-emic-id="emi-payment">   ' +
+        '                                        0  ' +
+        '                                     </h3>   ' +
+        '                                  </div>  ' +
+        '                                  <div class=""><h6>' + settings.language.RESULTS_INTEREST_PAYABLE_HEADING + '</h6>  ' +
+        '                                     <h3 class="emi-total-interest" data-emic-id="emi-total-interest">  ' +
+        '                                         0  ' +
+        '                                     </h3>   ' +
+        '                                  </div>  ' +
+        '                                  <div class=""><h6>' + settings.language.RESULTS_TOTAL_PAYABLE_HEADING + '</h6>  ' +
+        '                                     <h3 class="emi-total-payment" data-emic-id="emi-total-payment">  ' +
+        '                                         0  ' +
+        '                                     </h3>   ' +
+        '                                 </div>   ' +
+        '                               </div>   ' +
+        '                            </div>  ' +
+        '                            <div class="emi-chart  emi-chart-container"  >   ' +
+        '                            </div>  ' +
+        '                              ' +
+        '                            <div  class="emi-table-container col-md-12">  ' +
+        '                            </div>     ' +
+        '                        </div>  ';
+
+
+      $(baseEl).html(html);
+      $(baseEl + " .validation-alert").hide();
+
+    }
+
+
+    /* 
+     * returns array of [emi : "EMI_AMOUNT" , total_payment : "AMOUNT" , total_interest : "TOTAL_INTEREST" , data_obj : "PI_BREAKDOWN"]
+     * where PI_BREAKDOWN denotes prinicpal, interest components 
+     */
+    function calculateEMI(principal, rate_percent, time_in_months, precision) {
+
+      var EMI;
+      var rate_per_month = (rate_percent / 12) / 100; //divide the rate by 100 and 12
+      var numr = Math.pow((1 + rate_per_month), time_in_months);
+      var denr = (Math.pow((1 + rate_per_month), time_in_months) - 1);
+
+      EMI = principal * rate_per_month * (numr / denr);
+
+      //round the EMI to two decimal points 
+      EMI = EMI.toFixed(precision);
+
+      var total_payment = EMI * time_in_months;
+      var total_interest = total_payment - principal;
+
+      var data_obj = [];
+
+      var principal_by_month = principal;
+
+      // loop through each month and calculate 
+      // each months principal component and the interest component
+
+      for (var i = 1; i <= time_in_months; i++) {
+        var each_months_principal, each_months_interest;
+        each_months_interest = principal_by_month * rate_per_month;
+        var principal_component = EMI - each_months_interest;
+        var interest_component = each_months_interest;
+
+        var balance_principal = principal_by_month - principal_component;
+        if (balance_principal < 0) {
+          balance_principal = 0;
+        }
+        var single_month_data = [principal_component, interest_component, balance_principal];
+        data_obj.push(single_month_data);
+        principal_by_month = principal_by_month - principal_component;
+      }
+
+
+      var result = new Array();
+      result['principal'] = principal;
+      result['time_in_months'] = time_in_months;
+      result['rate_percent'] = rate_percent;
+      result['emi'] = EMI;
+      result['total_interest'] = total_interest.toFixed(precision);
+      result['total_payment'] = total_payment.toFixed(precision);
+      result['data_obj'] = data_obj;
+
+      return result;
+    }
+
+
+    /*
+     * initializes the widget based on provided settings
+     */
+    function init(init_options) {
+      var settings = init_options.settings;
+      var baseEl = init_options.baseEl;
+
+      var principal, rate_percent, time;
+      var time_in_months;
+
+      var precision = settings.precision;
+      var showComponents = settings.showComponents;
+      var showChart = settings.showChart;
+
+      var time_type = $(baseEl + " .js-time-type:checked").attr("value");
+
+
+      principal = $(baseEl + " .emi-principal").val();
+      rate_percent = $(baseEl + " .emi-rate").val();
+      time = $(baseEl + " .emi-time").val();
+
+      if (principal == "" || rate_percent == "" || time == "") {
+        return false;
+      }
+
+
+      if (time_type == "months") {
+        time_in_months = time;
+        $(baseEl + " .emi-time").attr("max", Math.round(settings.maxTime))
+      } else if (time_type == "years") {
+        $(baseEl + " .emi-time").attr("max", Math.round(settings.maxTime / 12));
+        time_in_months = time * 12;
+      }
+
+      var data = calculateEMI(principal, rate_percent, time_in_months, precision);
+
+      updateDataInHTML(data, init_options);
+
+      if (showComponents == true) {
+        drawComponentsTable(data, init_options);
+      }
+
+      if (showChart == true) {
+
+        drawChart(data, init_options);
+      }
+    }
+
+
+    function getLanguageText(settings) {
+      var language = {};
+      language.LABEL_PRINICIPAL = "Loan Amount";
+      language.CALCULATOR_HEADING = "EMI Calculator for Loans";
+      language.LABEL_RATE = "Loan Rate";
+      language.LABEL_TIME = "Loan Tenure";
+      language.RESULTS_EMI_HEADING = "Loan EMI";
+      language.RESULTS_INTEREST_PAYABLE_HEADING = "Total Interest Payable";
+      language.RESULTS_TOTAL_PAYABLE_HEADING = "Total Payment";
+      language.BREAKDOWN_TABLE_HEADING = "Monthly breakdown of EMI in <b>Principal</b> and <b>Interest</b> components";
+      language.PRINCIPAL_ERROR = "The loan amount value is larger than the  allowed value. Max value is " + settings.maxPrincipal;;
+      language.RATE_ERROR = "The loan rate  value is larger than the allowed value. Max value is " + settings.maxRate;
+      language.TIME_ERROR = "The loan tenure   is longer than the allowed value. Max value is " + settings.maxTime + " months or " + (settings.maxTime / 12) + " years";
+      return language;
+    }
+
+    return $(this).each(function () {
+
+
+      var settings = $.extend({
+        currency: 'NPR',
+        precision: 2,
+        showChart: true,
+        showComponents: true,
+        backgroundColor: ["#ed1c24", "#3150a1"],
+        hoverBackgroundColor: ["#ca0910", "#173585"],
+        initPrincipal: 100000,
+        maxPrincipal: 100000000000000,
+        initRate: 8.5,
+        maxRate: 20,
+        initTime: 120,
+        maxTime: 360
+      }, options);
+
+      var el = $(this);
+      var language = getLanguageText(settings);
+      settings.language = $.extend(language, options.language);
+
+
+      var baseEl, uniqId;
+
+      if (el.attr("id") == undefined) {
+        var timestamp = new Date().getTime();
+        el.attr("id", "emic-calculator-" + timestamp);
+        baseEl = "#emic-calculator-" + timestamp;
+        uniqId = "emic-calculator-" + timestamp;
+      } else {
+        baseEl = "#" + el.attr("id");
+        uniqId = el.attr("id");
+      }
+
+
+      var init_options = {
+        settings: settings,
+        baseEl: baseEl,
+        uniqId: uniqId
+      };
+
+      drawCalcForm(init_options);
+
+      init(init_options);
+
+      var baseEl = init_options.baseEl;
+      /*
+       * bind input elements for updating the EMI Calc results,
+       * charts and components table
+       */
+      $("body").on("change", baseEl + " .js-emic-var", function (e) {
+
+        if ($(this).hasClass("emi-principal") == true) {
+          if (parseInt($(this).val()) > parseInt(settings.maxPrincipal)) {
+            $(this).val(settings.maxPrincipal);
+            $(baseEl + " .validation-alert").show().html(settings.language.PRINCIPAL_ERROR);
+            return false;
+          }
+        }
+
+        if ($(this).hasClass("emi-rate") == true) {
+          if (parseInt($(this).val()) > parseInt(settings.maxRate)) {
+            $(this).val(settings.maxRate);
+            $(baseEl + " .validation-alert").show().html(settings.language.RATE_ERROR);
+            return false;
+          }
+        }
+
+        if ($(this).hasClass("emi-time") == true) {
+          if (parseFloat($(this).val()) > parseFloat($(this).attr("max"))) {
+            $(this).val($(this).attr("max"));
+            $(baseEl + " .validation-alert").show().html(settings.language.TIME_ERROR);
+            return false;
+          }
+        }
+
+        $(baseEl + " .validation-alert").hide();
+
+        init(init_options);
+      })
+
+      /*
+       * bind radio elements for time type : years or months, updating the EMI Calc results,
+       * charts and components table
+       */
+      $("body").on("change", baseEl + " .js-emic-radio-var", function () {
+        var time_type = $(baseEl + " .js-time-type:checked").attr("value");
+        if (time_type == "months") {
+          $(baseEl + " .emi-time").val(settings.maxTime);
+          $(baseEl + " .emi-time").attr("max", settings.maxTime);
+        } else if (time_type == "years") {
+          $(baseEl + " .emi-time").val(Math.round(settings.maxTime / 12));
+          $(baseEl + " .emi-time").attr("max", Math.round(settings.maxTime / 12));
+        }
+        init(init_options);
+
+      })
+
+
+    })
+
+  }
+}(jQuery));
+    </script>
+
+    <script>
+      'use strict';
+       $(document).ready(function(){ 
+	   $(".emic-calculator").emiculator({
+	    	language : {
+		    	LABEL_PRINICIPAL : "Your Loan Amount is ",
+		    	CALCULATOR_HEADING : "EMI Calculator for Loans ",
+		    }
+	    }); 
+      })
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Revenue Calculator</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #3e8e41;
+}
+
+#result {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+#result.hidden {
+    display: none;
+}
+
+h2 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#revenueDisplay {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Media queries for responsive design */
+
+@media only screen and (max-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+  label {
+    font-size: 14px;
+  }
+  input[type="number"] {
+    font-size: 14px;
+  }
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  h2 {
+    font-size: 16px;
+  }
+  #revenueDisplay {
+    font-size: 14px;
+  }
+}
+
+/* Eye-catching design elements */
+
+.container {
+  background-color: #f0f8ff;  /* Light blue background */
+}
+
+h1 {
+  color: #3f51b5;           /* Dark blue heading */
+}
+
+button {
+  background-color: #3f51b5; /* Same dark blue for button */
+}
+
+button:hover {
+  background-color: #28377d; /* Darker blue on hover */
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #3f51b5;  /* Underline for tooltip */
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  position: absolute;
+  top: -50px;
+  left: 105%;
+  width: 120px;
+  line-height: 1.5;
+  background-color: #f5f5f5;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.3);
+  transition: visibility 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Twitter Revenue Calculator</h1>
+        <div class="input-group">
+            <label for="followers">Monthly Active Followers (MAF):</label>
+            <input type="number" id="followers" min="0" placeholder="Enter your follower count">
+        </div>
+        <div class="input-group">
+            <label for="engagementRate">Engagement Rate (%):</label>
+            <input type="number" id="engagementRate" min="0" max="100" step="0.1" placeholder="Enter your engagement rate">
+            <span class="tooltip">Engagement rate = Average likes + retweets / number of tweets x 100</span>
+        </div>
+        <div class="input-group">
+            <label for="cpm">Cost-per-Mille (CPM):</label>
+            <input type="number" id="cpm" min="0" step="0.01" placeholder="Enter CPM (e.g., 5.00)">
+            <span class="tooltip">CPM = Estimated amount advertisers pay per 1,000 impressions</span>
+        </div>
+        <button onclick="calculateRevenue()">Calculate Revenue</button>
+        <div id="result" class="hidden">
+            <h2>Estimated Monthly Revenue:</h2>
+            <p id="revenueDisplay"></p>
+            <p class="disclaimer">This is an estimate. Actual revenue may vary based on several factors.</p>
+        </div>
+    </div>
+    <script>
+        function calculateRevenue() {
+  // Get input values
+  const followers = parseFloat(document.getElementById("followers").value);
+  const engagementRate = parseFloat(document.getElementById("engagementRate").value);
+  const cpm = parseFloat(document.getElementById("cpm").value);
+
+  // Input validation (optional, but recommended for a better user experience)
+  if (isNaN(followers) || followers <= 0) {
+    alert("Please enter a valid number of followers (greater than 0).");
+    return;
+  }
+
+  if (isNaN(engagementRate) || engagementRate < 0 || engagementRate > 100) {
+    alert("Please enter a valid engagement rate (between 0 and 100).");
+    return;
+  }
+
+  if (isNaN(cpm) || cpm <= 0) {
+    alert("Please enter a valid CPM (greater than 0).");
+    return;
+  }
+
+  // Calculate estimated impressions
+  const impressions = followers * engagementRate / 100;
+
+  // Calculate estimated revenue
+  const revenue = impressions * cpm / 1000;
+
+  // Format and display revenue
+  const formattedRevenue = revenue.toFixed(2); // Round to two decimal places
+  document.getElementById("revenueDisplay").textContent = `$${formattedRevenue}`;
+
+  // Show the result section
+  const result = document.getElementById("result");
+  result.classList.remove("hidden"); // Remove the "hidden" class
+}
+
+    </script>
+</body>
+</html>

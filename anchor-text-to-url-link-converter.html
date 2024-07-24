@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anchor Text to URL Converter</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+}
+
+.heading {
+    background-color: #ff8a94;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+button {
+    background-color: #ff8a94;
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #ff6f7f;
+}
+
+.preview {
+    text-align: left;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Anchor Text to URL Converter</h1>
+        <form id="converterForm">
+            <div class="form-group">
+                <label for="anchorText">Anchor Text:</label>
+                <input type="text" id="anchorText" name="anchorText" placeholder="Enter anchor text" required>
+            </div>
+            <div class="form-group">
+                <label for="url">URL:</label>
+                <input type="url" id="url" name="url" placeholder="Enter URL" required>
+            </div>
+            <button type="button" id="convertButton">Convert</button>
+            <button type="button" id="clearButton">Clear</button>
+            <div class="form-group">
+                <label for="outputLink">Generated HTML Link:</label>
+                <textarea id="outputLink" name="outputLink" readonly rows="4"></textarea>
+            </div>
+            <div id="outputPreview" class="preview">
+                <h3>Preview:</h3>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const convertButton = document.getElementById('convertButton');
+    const clearButton = document.getElementById('clearButton');
+    const anchorText = document.getElementById('anchorText');
+    const url = document.getElementById('url');
+    const outputLink = document.getElementById('outputLink');
+    const outputPreview = document.getElementById('outputPreview');
+
+    convertButton.addEventListener('click', function() {
+        const text = anchorText.value.trim();
+        const link = url.value.trim();
+        if (text && link) {
+            const htmlLink = `<a href="${link}" target="_blank">${text}</a>`;
+            outputLink.value = htmlLink;
+            outputPreview.innerHTML = htmlLink;
+        } else {
+            outputLink.value = 'Please provide both anchor text and URL.';
+            outputPreview.innerHTML = 'Please provide both anchor text and URL.';
+        }
+    });
+
+    clearButton.addEventListener('click', function() {
+        anchorText.value = '';
+        url.value = '';
+        outputLink.value = '';
+        outputPreview.innerHTML = '';
+    });
+});
+
+    </script>
+</body>
+</html>

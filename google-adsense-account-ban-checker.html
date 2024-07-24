@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdSense Ban Checker</title>
+    <style>
+        /* styles.css */
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        button {
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Google AdSense Ban Checker</h1>
+        <form id="banCheckerForm">
+            <input type="text" id="websiteUrl" placeholder="Enter website URL" required>
+            <div class="button-row">
+                <button type="submit">Check Status</button>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script>
+        // script.js
+
+        document.getElementById('banCheckerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const websiteUrl = document.getElementById('websiteUrl').value;
+            const resultDiv = document.getElementById('result');
+            
+            // Placeholder logic for checking AdSense ban status
+            // Since there's no official API, this is a simulated check
+            checkAdSenseBanStatus(websiteUrl).then(isBanned => {
+                if (isBanned) {
+                    resultDiv.textContent = `The website ${websiteUrl} is banned from Google AdSense.`;
+                    resultDiv.style.color = 'red';
+                } else {
+                    resultDiv.textContent = `The website ${websiteUrl} is not banned from Google AdSense.`;
+                    resultDiv.style.color = 'green';
+                }
+
+                // Clear the input field
+                document.getElementById('websiteUrl').value = '';
+            }).catch(error => {
+                resultDiv.textContent = `Error checking the status for ${websiteUrl}. Please try again.`;
+                resultDiv.style.color = 'orange';
+
+                // Clear the input field
+                document.getElementById('websiteUrl').value = '';
+            });
+        });
+
+        function checkAdSenseBanStatus(url) {
+            return new Promise((resolve, reject) => {
+                // Simulate an asynchronous check with a timeout
+                setTimeout(() => {
+                    // This is a mock function. Replace with actual logic if available.
+                    const isBanned = Math.random() < 0.5; // Randomly simulate banned or not banned
+                    resolve(isBanned);
+                }, 2000);
+            });
+        }
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+<!-- AdsenseGuard - Google Adsense Ban Checker
+The Google Adsense Ban Checker is a free online tool that allows you to check if a domain or URL is banned by Google Adsense. This tool is useful for publishers who want to make sure that their websites are eligible to display Adsense ads, as well as for advertisers who want to avoid placing ads on banned websites.
+
+To use the Google Adsense Ban Checker, simply enter the domain or URL that you want to check and click the "Check" button. The tool will then return a result indicating whether or not the domain or URL is banned. If the domain or URL is banned, the tool will also provide a reason for the ban.
+
+The Google Adsense Ban Checker is a valuable tool for anyone who uses Google Adsense. It is quick, easy, and accurate, and it can help you save time and money.
+
+Features
+Check if a domain or URL is banned/blocked by Google Adsense
+Get a reason for the ban if the domain or URL is banned
+Free to use
+Quick and easy to use
+Accurate results
+Benefits
+Make sure that your website is eligible to display Adsense ads
+Avoid placing ads on banned websites
+Avoid placing ads on blocked urls due to policy violations
+Save time and money
+Use Cases
+Publishers who want to make sure that their websites are eligible to display Adsense ads
+Publishers who want to make sure that urls on their website are not blocked by Google Adsense due to Policy issue
+Advertisers who want to avoid placing ads on banned websites
+Anyone who uses Google Adsense
+Protect your Google Adsense account from getting banned.
+FAQs
+1. Does this tool work only for Google Adsense?
+Our Adsense Ban Checker works on Google Adsense and other Google Ads related products like Google Ad Manager
+2. Will you charge for AdSense Banned Checker in the future?
+No, We have no plan to charge for our Adsense Banned checker tool using this web page, It is a free service from AdsenseGuard, and will be free in the future too.
+Apart from a free Adsense Banned Checker Tool, we also offer a free tool to help you to protect your Adsense Account from getting banned. This advanced tool will be released in the near future.
+3. How many domains or urls can I check with AdsenseGuard Google AdSense Banned Checker Tool?
+There is no limit yet, we offer our Google AdSense Banned Checker Tool for free. You can check as many domains or websites for free as you want
+4. AdsenseGuard identify some of my url are blocked by Adsense, what is the different between blocked and banned?
+Google mays block some of urls on your website from displaying ads due to Policy Violations, so better exclude those URLs on your website from displaying Google Ads to avoid the suspension of your Google Adsense Account.
+If you see that a URL is shown as "blocked", you may want to test more URLs with AdsenseGuard to identify if the domain is banned by Google Adsense or not. -->

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok Revenue Calculator</title>
+  <style>
+    body {
+font-family: Arial, sans-serif;
+background-color: #f0f0f0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}
+
+.calculator {
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+width: 80%;
+max-width: 400px;
+text-align: center;
+}
+
+.input-group {
+margin-bottom: 10px;
+text-align: left;
+}
+
+input[type="number"], button {
+padding: 8px;
+width: 100%;
+box-sizing: border-box;
+border: 1px solid #ccc;
+border-radius: 4px;
+font-size: 16px;
+}
+
+button {
+background-color: #ff0000;
+color: white;
+border: none;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+button:hover {
+background-color: #cc0000;
+}
+
+h1 {
+color: #333;
+margin-bottom: 20px;
+}
+
+.label {
+font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+  <div class="calculator">
+    <h1>TikTok Revenue Calculator</h1>
+    <div class="input-group">
+      <label for="followers">Followers:</label>
+      <input type="number" id="followers" min="0">
+    </div>
+    <div class="input-group">
+      <label for="views">Average Views per Video:</label>
+      <input type="number" id="views" min="0">
+    </div>
+    <div class="input-group">
+      <label for="engagement">Engagement Rate (%):</label>
+      <input type="number" id="engagement" min="0" max="100">
+    </div>
+    <div class="input-group">
+      <label for="cpc">Cost Per Thousand Views (CPM) ($):</label>
+      <input type="number" id="cpc" min="0" step="0.01">
+    </div>
+    <!-- <div class="input-group">
+      <label for="sponsorshipRate">Sponsorship Rate (Optional):</label>
+      <input type="number" id="sponsorshipRate" min="0" step="0.01">
+    </div> -->
+    <div class="input-group">
+      <label for="revenue">Estimated Revenue:</label>
+      <span id="revenue">$0.00</span>
+    </div>
+    <button onclick="calculateRevenue()">Calculate Revenue</button>
+  </div>
+
+  <script>
+    function calculateRevenue() {
+      const followers = parseInt(document.getElementById('followers').value);
+      const avgViews = parseInt(document.getElementById('views').value);
+      const engagementRate = parseFloat(document.getElementById('engagement').value);
+      const cpm = parseFloat(document.getElementById('cpc').value);
+      const sponsorshipRate = parseFloat(document.getElementById('sponsorshipRate').value) || 0;
+
+      if (isNaN(followers) || isNaN(avgViews) || isNaN(engagementRate) || isNaN(cpm)) {
+        alert('Please enter valid numbers for all fields.');
+        return;
+      }
+
+      const engagedFollowers = followers * (engagementRate / 100); // Calculate engaged followers
+      const viewsPerMonth = engagedFollowers * avgViews;
+
+      let revenue = (viewsPerMonth / 1000) * cpm;  // Ad revenue
+
+      // Add sponsorship revenue if provided
+      if (!isNaN(sponsorshipRate)) {
+        revenue += sponsorshipRate * followers; // Assuming per-follower sponsorship rate
+      }
+
+      document.getElementById('revenue').textContent = `$${revenue.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Speed Checker</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+    margin: 0;
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#loading {
+    margin-top: 20px;
+    color: #555;
+}
+
+#result {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+}
+
+.hidden {
+    display: none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Page Speed Checker</h1>
+        <form id="speed-form">
+            <label for="website-url">Enter Website URL:</label>
+            <input type="url" id="website-url" required>
+            <button type="submit">Check Speed</button>
+        </form>
+        <div id="loading" class="hidden">Checking...</div>
+        <div id="result" class="hidden"></div>
+    </div>
+    <script>
+        document.getElementById('speed-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const websiteUrl = document.getElementById('website-url').value;
+    const loadingDiv = document.getElementById('loading');
+    const resultDiv = document.getElementById('result');
+
+    // Hide result and show loading
+    resultDiv.classList.add('hidden');
+    loadingDiv.classList.remove('hidden');
+
+    // Simulate an asynchronous operation
+    setTimeout(function() {
+        const pageSpeedScore = calculatePageSpeed(websiteUrl);
+        
+        resultDiv.innerHTML = `
+            <p>Page Speed Score for ${websiteUrl}:</p>
+            <div class="score">${pageSpeedScore}</div>
+        `;
+        resultDiv.classList.remove('hidden');
+        loadingDiv.classList.add('hidden');
+    }, 2000);
+});
+
+// Simulated function to calculate page speed
+function calculatePageSpeed(url) {
+    // Simple logic to simulate page speed score
+    const score = Math.floor(Math.random() * 100) + 1;
+    return score;
+}
+
+    </script>
+</body>
+</html>

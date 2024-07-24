@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions Page Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        section#results {
+            margin-top: 20px;
+        }
+
+        textarea {
+            height: 200px;
+            resize: none;
+        }
+
+        .actions {
+            margin-top: 10px;
+        }
+        
+        .actions button {
+            background-color: #28a745;
+            margin-right: 10px;
+        }
+
+        .actions button:hover {
+            background-color: #218838;
+        }
+
+        .actions button.copy {
+            background-color: #dc3545;
+        }
+
+        .actions button.copy:hover {
+            background-color: #c82333;
+        }
+
+        .notification {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            font-size: 14px;
+        }
+
+        .terms-preview {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Terms and Conditions Page Generator</h1>
+        </header>
+        
+        <main>
+            <form id="terms-form">
+                <div class="input-group">
+                    <label for="website-url">Website URL:</label>
+                    <input type="text" id="website-url" name="website-url" placeholder="Enter website URL">
+                </div>
+                <div class="input-group">
+                    <label for="website-name">Website Name:</label>
+                    <input type="text" id="website-name" name="website-name" placeholder="Enter website name">
+                </div>
+                <div class="input-group">
+                    <label for="contact-email">Contact Email:</label>
+                    <input type="email" id="contact-email" name="contact-email" placeholder="Enter contact email">
+                </div>
+                <button type="button" id="generate-button">Generate Terms and Conditions</button>
+            </form>
+            
+            <section id="results">
+                <h2>Your Terms and Conditions:</h2>
+                <textarea id="terms-and-conditions" readonly></textarea>
+                <div class="actions">
+                    <button type="button" id="preview-button">Preview</button>
+                    <button type="button" class="copy" id="copy-button">Copy to Clipboard</button>
+                </div>
+                <div id="notification" class="notification">Copied!</div>
+            </section>
+
+            <!-- Terms and Conditions Preview Section -->
+            <section id="terms-preview" class="terms-preview"></section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2024 Terms and Conditions Generator</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('generate-button').addEventListener('click', function() {
+            const websiteURL = document.getElementById('website-url').value;
+            const websiteName = document.getElementById('website-name').value;
+            const contactEmail = document.getElementById('contact-email').value;
+
+            // Validate input fields
+            if (!websiteURL || !websiteName || !contactEmail) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Generate Terms and Conditions text
+            const termsAndConditions = `
+            <h1>Terms and Conditions for "${websiteName}"</h1>
+            <p>Welcome to "${websiteName}"!</p>
+            <p>These terms and conditions outline the rules and regulations for the use of ${websiteName}'s Website, located at ${websiteURL}.</p>
+            <h2>Terms</h2>
+            <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use ${websiteName} if you do not agree to take all of the terms and conditions stated on this page.</p>
+            <h2>Cookies</h2>
+            <p>We employ the use of cookies. By accessing ${websiteName}, you agreed to use cookies in agreement with ${websiteName}'s Privacy Policy.</p>
+            <h2>License</h2>
+            <p>Unless otherwise stated, ${websiteName} and/or its licensors own the intellectual property rights for all material on ${websiteName}. All intellectual property rights are reserved. You may access this from ${websiteName} for your own personal use subjected to restrictions set in these terms and conditions.</p>
+            <h2>You must not:</h2>
+            <ul>
+                <li>Republish material from ${websiteName}</li>
+                <li>Sell, rent or sub-license material from ${websiteName}</li>
+                <li>Reproduce, duplicate or copy material from ${websiteName}</li>
+                <li>Redistribute content from ${websiteName}</li>
+            </ul>
+            <h2>Your Privacy</h2>
+            <p>Please read our <a href="${websiteURL}/privacy-policy">Privacy Policy</a>.</p>
+            <h2>No warranties</h2>
+            <p>This website is provided “as is,” with all faults, and ${websiteName} express no representations or warranties, of any kind related to this website or the materials contained on this website.</p>
+            <h2>Limitation of liability</h2>
+            <p>In no event shall ${websiteName}, nor any of its officers, directors and employees, be held liable for anything arising out of or in any way connected with your use of this website whether such liability is under contract. ${websiteName}, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this website.</p> <p> Our Terms and Conditions policy is generated by <a href="https://hamrogadgetbazar.com" target="_blanks"> Hamrogadgetbazar </a></p>
+            <h2>Indemnification</h2>
+            <p>You hereby indemnify to the fullest extent ${websiteName} from and against any and/or all liabilities, costs, demands, causes of action, damages and expenses arising in any way related to your breach of any of the provisions of these Terms.</p>
+            <h2>Severability</h2>
+            <p>If any provision of these Terms is found to be invalid under any applicable law, such provisions shall be deleted without affecting the remaining provisions herein.</p>
+            <h2>Variation of Terms</h2>
+            <p>${websiteName} is permitted to revise these Terms at any time as it sees fit, and by using this website you are expected to review such Terms on a regular basis to ensure you understand all terms and conditions governing use of this website.</p>
+            <h2>Assignment</h2>
+            <p>${websiteName} is allowed to assign, transfer, and subcontract its rights and/or obligations under these Terms without any notification. However, you are not allowed to assign, transfer, or subcontract any of your rights and/or obligations under these Terms.</p>
+            <h2>Entire Agreement</h2>
+            <p>These Terms constitute the entire agreement between ${websiteName} and you in relation to your use of this website, and supersede all prior agreements and understandings.</p>
+            <h2>Governing Law & Jurisdiction</h2>
+            <p>These Terms will be governed by and interpreted in accordance with the laws of the State/Country in which ${websiteName} is based, and you submit to the non-exclusive jurisdiction of the state and federal courts located in that state or country for the resolution of any disputes.</p>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about these Terms and Conditions, please contact us at ${contactEmail}.</p>
+            <p>Last updated on ${new Date().toLocaleDateString()}.</p>
+            `;
+
+            // Display Terms and Conditions
+            document.getElementById('terms-and-conditions').innerHTML = termsAndConditions;
+        });
+
+        document.getElementById('preview-button').addEventListener('click', function() {
+            const termsAndConditionsHTML = document.getElementById('terms-and-conditions').innerHTML;
+            const previewSection = document.getElementById('terms-preview');
+            if (termsAndConditionsHTML) {
+                previewSection.innerHTML = termsAndConditionsHTML;
+                previewSection.style.display = 'block';
+            } else {
+                alert('Generate the Terms and Conditions first.');
+            }
+        });
+
+        document.getElementById('copy-button').addEventListener('click', function() {
+            const termsAndConditionsText = document.getElementById('terms-and-conditions').textContent;
+            if (termsAndConditionsText) {
+                navigator.clipboard.writeText(termsAndConditionsText).then(function() {
+                    // Show notification
+                    const notification = document.getElementById('notification');
+                    notification.style.display = 'block';
+                    setTimeout(() => {
+                        notification.style.display = 'none';
+                    }, 2000); // Hide notification after 2 seconds
+                }, function() {
+                    alert('Failed to copy Terms and Conditions.');
+                });
+            } else {
+                alert('Generate the Terms and Conditions first.');
+            }
+        });
+    </script>
+</body>
+</html>

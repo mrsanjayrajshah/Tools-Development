@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Land Area Unit Converter</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f9;
+}
+
+.container {
+    max-width: 500px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.converter {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group,
+.output-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-size: 16px;
+    color: #555;
+}
+
+input,
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.result {
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nepali Land Area Unit Converter</h1>
+        <div class="converter">
+            <div class="input-group">
+                <label for="inputValue">Enter value:</label>
+                <input type="number" id="inputValue" placeholder="Enter value">
+                <select id="inputUnit">
+                    <option value="bigha">Bigha</option>
+                    <option value="kattha">Kattha</option>
+                    <option value="dhur">Dhur</option>
+                    <option value="ropani">Ropani</option>
+                    <option value="aana">Aana</option>
+                    <option value="paisa">Paisa</option>
+                    <option value="daam">Daam</option>
+                </select>
+            </div>
+            <div class="output-group">
+                <label for="outputUnit">Convert to:</label>
+                <select id="outputUnit">
+                    <option value="bigha">Bigha</option>
+                    <option value="kattha">Kattha</option>
+                    <option value="dhur">Dhur</option>
+                    <option value="ropani">Ropani</option>
+                    <option value="aana">Aana</option>
+                    <option value="paisa">Paisa</option>
+                    <option value="daam">Daam</option>
+                </select>
+                <button onclick="convert()">Convert</button>
+            </div>
+            <div class="result">
+                <h2>Result: <span id="resultValue"></span></h2>
+            </div>
+        </div>
+    </div>
+    <script>
+        const conversionRates = {
+    bigha: {
+        bigha: 1,
+        kattha: 20,
+        dhur: 400,
+        ropani: 13.31,
+        aana: 212.96,
+        paisa: 851.84,
+        daam: 3407.36
+    },
+    kattha: {
+        bigha: 1 / 20,
+        kattha: 1,
+        dhur: 20,
+        ropani: 13.31 / 20,
+        aana: 212.96 / 20,
+        paisa: 851.84 / 20,
+        daam: 3407.36 / 20
+    },
+    dhur: {
+        bigha: 1 / 400,
+        kattha: 1 / 20,
+        dhur: 1,
+        ropani: 13.31 / 400,
+        aana: 212.96 / 400,
+        paisa: 851.84 / 400,
+        daam: 3407.36 / 400
+    },
+    ropani: {
+        bigha: 1 / 13.31,
+        kattha: 20 / 13.31,
+        dhur: 400 / 13.31,
+        ropani: 1,
+        aana: 16,
+        paisa: 64,
+        daam: 256
+    },
+    aana: {
+        bigha: 1 / 212.96,
+        kattha: 20 / 212.96,
+        dhur: 400 / 212.96,
+        ropani: 1 / 16,
+        aana: 1,
+        paisa: 4,
+        daam: 16
+    },
+    paisa: {
+        bigha: 1 / 851.84,
+        kattha: 20 / 851.84,
+        dhur: 400 / 851.84,
+        ropani: 1 / 64,
+        aana: 1 / 4,
+        paisa: 1,
+        daam: 4
+    },
+    daam: {
+        bigha: 1 / 3407.36,
+        kattha: 20 / 3407.36,
+        dhur: 400 / 3407.36,
+        ropani: 1 / 256,
+        aana: 1 / 16,
+        paisa: 1 / 4,
+        daam: 1
+    }
+};
+
+function convert() {
+    const inputValue = document.getElementById('inputValue').value;
+    const inputUnit = document.getElementById('inputUnit').value;
+    const outputUnit = document.getElementById('outputUnit').value;
+
+    if (inputValue === '' || isNaN(inputValue)) {
+        alert('Please enter a valid number');
+        return;
+    }
+
+    const conversionRate = conversionRates[inputUnit][outputUnit];
+    const result = inputValue * conversionRate;
+
+    document.getElementById('resultValue').textContent = `${result.toFixed(2)} ${outputUnit}`;
+}
+
+    </script>
+</body>
+</html>

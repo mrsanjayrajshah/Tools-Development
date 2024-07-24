@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Decoder</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 700px;
+}
+
+.heading {
+    background-color: #ff8a94;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.qr-container {
+    position: relative;
+}
+
+#reader {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 2px solid #ff8a94;
+    border-radius: 10px;
+}
+
+.result {
+    margin-top: 20px;
+}
+
+.result h2 {
+    font-size: 20px;
+    color: #ff8a94;
+}
+
+#result {
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    background-color: #ff8a94;
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #ff6f7f;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    #reader {
+        max-width: 100%;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">QR Code Decoder</h1>
+        <div class="qr-container">
+            <div id="reader" width="600px"></div>
+            <div class="result">
+                <h2>Decoded Result:</h2>
+                <p id="result">Scan a QR code to see the result here.</p>
+            </div>
+        </div>
+        <button id="stopButton">Stop Scanning</button>
+    </div>
+
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    let html5QrCode;
+
+    function onScanSuccess(decodedText, decodedResult) {
+        document.getElementById('result').textContent = decodedText;
+    }
+
+    function onScanError(errorMessage) {
+        console.warn(`QR Code Scan Error: ${errorMessage}`);
+    }
+
+    html5QrCode = new Html5Qrcode("reader");
+
+    html5QrCode.start(
+        { facingMode: "environment" },
+        {
+            fps: 10,
+            qrbox: 250
+        },
+        onScanSuccess,
+        onScanError
+    ).catch(err => {
+        console.error(`Unable to start scanning. Error: ${err}`);
+    });
+
+    document.getElementById('stopButton').addEventListener('click', function() {
+        html5QrCode.stop().then(ignore => {
+            console.log("QR code scanning stopped.");
+        }).catch(err => {
+            console.error(`Failed to stop scanning. Error: ${err}`);
+        });
+    });
+});
+
+    </script>
+</body>
+</html>

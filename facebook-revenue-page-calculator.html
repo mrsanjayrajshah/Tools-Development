@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Page Revenue Calculator</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.calculator {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+input[type="number"], button {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #3b5998;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2d4373;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Facebook Page Revenue Calculator</h1>
+        <div class="input-group">
+            <label for="likes">Page Likes:</label>
+            <input type="number" id="likes" min="0">
+        </div>
+        <div class="input-group">
+            <label for="posts">Monthly Posts:</label>
+            <input type="number" id="posts" min="0">
+        </div>
+        <div class="input-group">
+            <label for="engagement">Engagement Rate (%):</label>
+            <input type="number" id="engagement" min="0" max="100">
+        </div>
+        <div class="input-group">
+            <label for="cpc">Cost Per Click (CPC) ($):</label>
+            <input type="number" id="cpc" min="0" step="0.01">
+        </div>
+        <div class="input-group">
+            <label for="revenue">Estimated Revenue:</label>
+            <span id="revenue">$0.00</span>
+        </div>
+        <button onclick="calculateRevenue()">Calculate Revenue</button>
+    </div>
+
+    <script>
+        function calculateRevenue() {
+    const likes = parseInt(document.getElementById('likes').value);
+    const posts = parseInt(document.getElementById('posts').value);
+    const engagementRate = parseFloat(document.getElementById('engagement').value);
+    const cpc = parseFloat(document.getElementById('cpc').value);
+
+    if (isNaN(likes) || isNaN(posts) || isNaN(engagementRate) || isNaN(cpc)) {
+        alert('Please enter valid numbers for all fields.');
+        return;
+    }
+
+    const engagement = engagementRate / 100;
+    const engagementsPerMonth = likes * engagement * posts;
+    const revenue = engagementsPerMonth * cpc;
+
+    document.getElementById('revenue').textContent = `$${revenue.toFixed(2)}`;
+}
+
+    </script>
+</body>
+</html>

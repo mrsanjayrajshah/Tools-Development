@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest ( ब्याज ) Calculator</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .container h2 {
+            color: white;
+            background-color: #5592c2;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            margin: -20px -20px 20px -20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .grid-item {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+        input[type="text"], select {
+            width: calc(100% - 16px);
+            padding: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            background-color: #5592c2;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #3a7aa0;
+        }
+        #table {
+            display: none;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .grid-item-result {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+        .grid-container-result {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .grid-container-result .grid-item-result:nth-child(odd) {
+            background-color: #f8f8f8;
+        }
+        @media screen and (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 15px;
+            }
+        }
+        /* Adjust button positions */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .button-container .left {
+            margin-left: 10px; /* Adjust as needed */
+        }
+        .button-container .right {
+            margin-right: 10px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form name="form1" onsubmit="return calculateInterest(event)">
+            <h2>Interest ( ब्याज ) Calculator</h2>
+            <div class="grid">
+                <div class="grid-item">Principal (मूलधन)</div>
+                <div class="grid-item"><input type="text" placeholder="Principal (Rs.)" title="Please Input only numbers" pattern="[0-9/.]+" name="principal" id="principal" class="form-control" value="" required></div>
+            </div>
+            <div class="grid">
+                <div class="grid-item">Rate of Interest<br>(ब्याज की दर)</div>
+                <div class="grid-item"><input type="text" placeholder="Rate (%)" id="rate" title="Please Input only numbers" pattern="[0-9/.]+" name="rate" class="form-control" value="" required> %</div>
+            </div>
+            <div class="grid">
+                <div class="grid-item">Period (समय)</div>
+                <div class="grid-item"><input type="text" placeholder="Time" id="period" style="width:95px;" pattern="[0-9]+" title="Please Input only numbers" name="period" class="form-control" value="" required> <select id="periodtype" name="periodType" style="width:100px;">
+                    <option value="years">Years (साल)</option>
+                    <option value="months">Months (महीने)</option>
+                    <option value="days">Days (दिन)</option>
+                </select></div>
+            </div>
+            <div class="grid">
+                <div class="grid-item">Frequency (आवृति)</div>
+                <div class="grid-item"><select id="frequency" name="frequency">
+                    <option value="1">Compound Annually Interest (चक्रवृद्धि वार्षिक ब्याज)</option>
+                    <option value="4">Compound Quarterly Interest (चक्रवृद्धि त्रैमासिक ब्याज)</option>
+                    <option value="2">Simple Interest (साधारण ब्याज)</option>
+                    <option value="3">Compound Semi-Annually Interest (चक्रवृद्धि अर्ध-वार्षिक ब्याज)</option>
+                    <option value="12">Compound Monthly Interest (चक्रवृद्धि मासिक ब्याज)</option>
+                </select></div>
+            </div>
+            <div class="button-container">
+                <div class="left">
+                    <button type="button" onclick="clean()">Reset</button>
+                </div>
+                <div class="right">
+                    <button type="submit">Calculate</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="result-container">
+        <div class="container" id="table">
+            <h2>Result</h2>
+            <div class="grid-container-result">
+                <div class="grid-item-result">Principal (मूलधन)</div>
+                <div class="grid-item-result"><span id="p2">1000</span></div>
+            </div>
+            <div class="grid-container-result">
+                <div class="grid-item-result">Rate (दर)</div>
+                <div class="grid-item-result"><span id="r2">3</span>%</div>
+            </div>
+            <div class="grid-container-result">
+                <div class="grid-item-result">Time (समय)</div>
+                <div class="grid-item-result"><span id="t2">1</span> <span id="pt2">years</span></div>
+            </div>
+            <div class="grid-container-result">
+                <div class="grid-item-result">Frequency (आवृति)</div>
+                <div class="grid-item-result"><span id="f2">Compound Annually Interest</span></div>
+            </div>
+            <div class="grid-container-result">
+                <div class="grid-item-result">Interest (ब्याज)</div>
+                <div class="grid-item-result"><span id="interest">30</span></div>
+            </div>
+            <div class="grid-container-result">
+                <div class="grid-item-result">Final Amount (मिश्रधन)</div>
+                <div class="grid-item-result"><span id="finalAmount">1030</span></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calculateInterest(event) {
+            event.preventDefault();
+
+            let principal = parseFloat(document.getElementById("principal").value);
+            let rate = parseFloat(document.getElementById("rate").value);
+            let period = parseFloat(document.getElementById("period").value);
+            let periodType = document.getElementById("periodtype").value;
+            let frequency = parseFloat(document.getElementById("frequency").value);
+
+            let interest = 0;
+            let finalAmount = 0;
+
+            switch (frequency) {
+                case 1: // Compound Annually
+                    if (periodType === 'years') {
+                        interest = (principal * rate * period) / 100;
+                        finalAmount = principal + interest;
+                    } else if (periodType === 'months') {
+                        let n = period / 12;
+                        interest = principal * Math.pow((1 + rate / 100), n) - principal;
+                        finalAmount = principal + interest;
+                    } else if (periodType === 'days') {
+                        let n = period / 365;
+                        interest = principal * Math.pow((1 + rate / 100), n) - principal;
+                        finalAmount = principal + interest;
+                    }
+                    break;
+                case 2: // Simple Interest
+                    if (periodType === 'years') {
+                        interest = (principal * rate * period) / 100;
+                        finalAmount = principal + interest;
+                    } else if (periodType === 'months') {
+                        interest = (principal * rate * period) / (12 * 100);
+                        finalAmount = principal + interest;
+                    } else if (periodType === 'days') {
+                        interest = (principal * rate * period) / (365 * 100);
+                        finalAmount = principal + interest;
+                    }
+                    break;
+                case 3: // Compound Semi-Annually
+                    if (periodType === 'years') {
+                        interest = (principal * rate * period) / 200;
+                        finalAmount = principal + interest;
+                    } else if (periodType === 'months') {
+                        let n = period / 6;
+                        interest = principal * Math.pow((1 + rate / 100), n) - principal;
+                        finalAmount = principal + interest;
+                    } else if (periodType === 'days') {
+                        let n = period / 183;
+                        interest = principal * Math.pow((1 + rate / 100), n) - principal;
+                        finalAmount = principal + interest;
+                    }
+                    break;
+                case 4: // Compound Quarterly
+                    if (periodType === 'years') {
+                        interest = (principal * rate * period) / 400;
+                        finalAmount = principal + interest;
+                    } else if (periodType === 'months') {
+                        let n = period / 3;
+                        interest = principal * Math.pow((1 + rate / 100), n) - principal;
+                        finalAmount = principal + interest;
+                    } else if (periodType === 'days') {
+                        let n = period / 91;
+                        interest = principal * Math.pow((1 + rate / 100), n) - principal;
+                        finalAmount = principal + interest;
+                    }
+                    break;
+                case 12: // Compound Monthly
+                    if (periodType === 'years') {
+                        interest = (principal * rate * period) / 1200;
+                        finalAmount = principal + interest;
+                    } else if (periodType === 'months') {
+                        interest = principal * Math.pow((1 + rate / 100), period) - principal;
+                        finalAmount = principal + interest;
+                    } else if (periodType === 'days') {
+                        let n = period / 30.417; // Average days in a month over a year
+                        interest = principal * Math.pow((1 + rate / 100), n) - principal;
+                        finalAmount = principal + interest;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            document.getElementById("p2").innerText = principal.toFixed(2);
+            document.getElementById("r2").innerText = rate.toFixed(2);
+            document.getElementById("t2").innerText = period.toFixed(2);
+            document.getElementById("pt2").innerText = periodType;
+            document.getElementById("f2").innerText = document.getElementById("frequency").options[document.getElementById("frequency").selectedIndex].text;
+            document.getElementById("interest").innerText = interest.toFixed(2);
+            document.getElementById("finalAmount").innerText = finalAmount.toFixed(2);
+
+            document.getElementById("table").style.display = 'grid';
+        }
+
+        function clean() {
+            document.getElementById("principal").value = '';
+            document.getElementById("rate").value = '';
+            document.getElementById("period").value = '';
+            document.getElementById("table").style.display = 'none';
+        }
+    </script>
+</body>
+</html>

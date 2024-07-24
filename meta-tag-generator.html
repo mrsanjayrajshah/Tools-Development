@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Tag Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+.heading {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus, textarea:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    background-color: #6a11cb;
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 48%;
+}
+
+button:hover {
+    background-color: #2575fc;
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Meta Tag Generator</h1>
+        <form id="metaForm">
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description">
+            </div>
+
+            <div class="form-group">
+                <label for="keywords">Keywords:</label>
+                <input type="text" id="keywords" name="keywords">
+            </div>
+
+            <div class="form-group">
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author">
+            </div>
+
+            <div class="form-group">
+                <label for="language">Language:</label>
+                <input type="text" id="language" name="language">
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country">
+            </div>
+
+            <div class="form-group">
+                <label for="robots">Robots:</label>
+                <select id="robots" name="robots">
+                    <option value="">Select One</option>
+                    <option value="all">All</option>
+                    <option value="none">None</option>
+                    <option value="index">Index</option>
+                    <option value="noindex">No Index</option>
+                    <option value="follow">Follow</option>
+                    <option value="nofollow">No Follow</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button type="button" onclick="generateMetaTags()">Generate</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+        <textarea id="output" readonly></textarea>
+    </div>
+    <script>
+        function generateMetaTags() {
+    const description = document.getElementById('description').value;
+    const keywords = document.getElementById('keywords').value;
+    const author = document.getElementById('author').value;
+    const language = document.getElementById('language').value;
+    const country = document.getElementById('country').value;
+    const robots = document.getElementById('robots').value;
+
+    let metaTags = '';
+
+    if (description) {
+        metaTags += `<meta name="description" content="${description}">\n`;
+    }
+    if (keywords) {
+        metaTags += `<meta name="keywords" content="${keywords}">\n`;
+    }
+    if (author) {
+        metaTags += `<meta name="author" content="${author}">\n`;
+    }
+    if (language) {
+        metaTags += `<meta name="language" content="${language}">\n`;
+    }
+    if (country) {
+        metaTags += `<meta name="country" content="${country}">\n`;
+    }
+    if (robots) {
+        metaTags += `<meta name="robots" content="${robots}">\n`;
+    }
+
+    document.getElementById('output').value = metaTags;
+}
+
+    </script>
+</body>
+</html>

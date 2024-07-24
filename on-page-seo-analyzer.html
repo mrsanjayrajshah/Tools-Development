@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Analyzer Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .result-value {
+            font-weight: bold;
+        }
+
+        .loading {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .heading-counts {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SEO Analyzer Tool</h1>
+        <div class="input-container">
+            <input type="text" id="url-input" placeholder="Enter post URL">
+            <button onclick="analyzeSEO()">Analyze</button>
+        </div>
+        <div id="loading" class="loading" style="display: none;">Loading...</div>
+        <div id="results" style="display: none;">
+            <h2>Results</h2>
+            <div id="title" class="result-item">Title: <span class="result-value">Missing</span></div>
+            <div id="description" class="result-item">Description: <span class="result-value">Missing</span></div>
+            <div id="canonical" class="result-item">Canonical: <span class="result-value">Missing</span></div>
+            <div id="robots-tag" class="result-item">Robots Tag: <span class="result-value">Missing</span></div>
+            <div id="x-robots-tag" class="result-item">X-Robots-Tag: <span class="result-value">Missing</span></div>
+            <div id="keywords" class="result-item">Keywords: <span class="result-value">Missing</span></div>
+            <div id="word-count" class="result-item">Word Count: <span class="result-value">0</span></div>
+            <div id="lang" class="result-item">Lang: <span class="result-value">Missing</span></div>
+            <div class="result-item heading-counts">
+                <span>H1: <span id="h1-count" class="result-value">0</span></span>
+                <span>H2: <span id="h2-count" class="result-value">0</span></span>
+                <span>H3: <span id="h3-count" class="result-value">0</span></span>
+                <span>H4: <span id="h4-count" class="result-value">0</span></span>
+                <span>H5: <span id="h5-count" class="result-value">0</span></span>
+                <span>H6: <span id="h6-count" class="result-value">0</span></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        async function analyzeSEO() {
+            const url = document.getElementById('url-input').value;
+            if (!url) {
+                alert('Please enter a valid URL');
+                return;
+            }
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+
+            try {
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+                const data = await response.json();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data.contents, 'text/html');
+
+                const title = doc.querySelector('title')?.innerText || 'Missing';
+                const description = doc.querySelector('meta[name="description"]')?.getAttribute('content') || 'Missing';
+                const canonical = doc.querySelector('link[rel="canonical"]')?.getAttribute('href') || 'Missing';
+                const robots = doc.querySelector('meta[name="robots"]')?.getAttribute('content') || 'Missing';
+                const xRobots = doc.querySelector('meta[name="x-robots-tag"]')?.getAttribute('content') || 'Missing';
+                const keywords = doc.querySelector('meta[name="keywords"]')?.getAttribute('content') || 'Missing';
+                
+                // Improved word count for the main post content
+                const mainContent = doc.querySelector('main') || doc.body;
+                const wordCount = mainContent.innerText.split(/\s+/).length;
+                
+                const lang = doc.documentElement.lang || 'Missing';
+
+                const h1Count = doc.querySelectorAll('h1').length;
+                const h2Count = doc.querySelectorAll('h2').length;
+                const h3Count = doc.querySelectorAll('h3').length;
+                const h4Count = doc.querySelectorAll('h4').length;
+                const h5Count = doc.querySelectorAll('h5').length;
+                const h6Count = doc.querySelectorAll('h6').length;
+
+                document.getElementById('title').querySelector('.result-value').innerText = title;
+                document.getElementById('description').querySelector('.result-value').innerText = description;
+                document.getElementById('canonical').querySelector('.result-value').innerText = canonical;
+                document.getElementById('robots-tag').querySelector('.result-value').innerText = robots;
+                document.getElementById('x-robots-tag').querySelector('.result-value').innerText = xRobots;
+                document.getElementById('keywords').querySelector('.result-value').innerText = keywords;
+                document.getElementById('word-count').querySelector('.result-value').innerText = wordCount;
+                document.getElementById('lang').querySelector('.result-value').innerText = lang;
+                document.getElementById('h1-count').innerText = h1Count;
+                document.getElementById('h2-count').innerText = h2Count;
+                document.getElementById('h3-count').innerText = h3Count;
+                document.getElementById('h4-count').innerText = h4Count;
+                document.getElementById('h5-count').innerText = h5Count;
+                document.getElementById('h6-count').innerText = h6Count;
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+            } catch (error) {
+                alert('Failed to fetch and analyze the URL. Please try again.');
+                console.error(error);
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

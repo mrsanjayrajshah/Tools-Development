@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+        }
+
+        .heading {
+            background-color: #ff8a94;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #ff8a94;
+            box-shadow: 0 0 5px rgba(255, 138, 148, 0.5);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            background-color: #ff8a94;
+            border: none;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 48%;
+        }
+
+        button:hover {
+            background-color: #ff6f7f;
+        }
+
+        #copyButton {
+            background-color: #28a745;
+        }
+
+        #copyButton:hover {
+            background-color: #218838;
+        }
+
+        .notification {
+            display: none;
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 16px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+
+        #qr-code-container img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        #qr-download-btn {
+            background-color: transparent;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            color: #ff8a94;
+            cursor: pointer;
+        }
+
+        #qr-error-msg {
+            display: none;
+            background-color: #ffdddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #d9534f;
+        }
+
+        @media screen and (max-width: 800px) {
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">QR Code Generator</h1>
+        <form id="qrForm">
+            <div class="form-group">
+                <label for="qrInput">Enter Text/Link:</label>
+                <input type="text" id="qrInput" name="qrInput" placeholder="Enter text/link" required>
+            </div>
+            <div class="button-group">
+                <button type="button" id="generateBtn">Generate</button>
+                <button type="reset">Reset</button>
+            </div>
+            <div id="qr-error-msg">Warning! Please Enter Something...</div>
+        </form>
+        <div id="qr-code-container" class="text-center">
+            <div id="qr-code"></div>
+            <a id="qr-download-link" href="#" download>
+                <button id="qr-download-btn">Download</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function () {
+            const qrInput = document.getElementById('qrInput').value;
+            const qrCodeContainer = document.getElementById('qr-code');
+            const qrErrorMsg = document.getElementById('qr-error-msg');
+            const qrDownloadLink = document.getElementById('qr-download-link');
+
+            if (qrInput.trim() === '') {
+                qrErrorMsg.style.display = 'block';
+                qrCodeContainer.innerHTML = '';
+                return;
+            }
+
+            qrErrorMsg.style.display = 'none';
+            const qrUrl = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(qrInput)}`;
+            qrCodeContainer.innerHTML = `<img src="${qrUrl}" alt="QR Code">`;
+            qrDownloadLink.href = qrUrl;
+        });
+
+        document.getElementById('qrInput').addEventListener('input', function () {
+            if (this.value.trim() === '') {
+                document.getElementById('qr-error-msg').style.display = 'block';
+            } else {
+                document.getElementById('qr-error-msg').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Website Clone Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        #downloadBtn {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #downloadBtn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Static Website Clone Generator</h1>
+        <form id="cloneForm">
+            <label for="weblink">Website URL:</label>
+            <input type="url" id="weblink" name="weblink" placeholder="https://example.com" required>
+            <button type="submit">Generate Clone</button>
+        </form>
+        <div id="status"></div>
+        <a id="downloadBtn" href="#" download="website-clone.zip">Download ZIP</a>
+    </div>
+    <script>
+        document.getElementById('cloneForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const weblink = document.getElementById('weblink').value;
+
+            // Basic validation
+            if (!weblink) {
+                document.getElementById('status').innerText = 'Please enter a valid URL.';
+                return;
+            }
+
+            // Show loading indicator and simulate the process
+            document.getElementById('status').innerText = 'Starting to clone website...';
+            document.getElementById('downloadBtn').style.display = 'none'; // Hide download button initially
+
+            simulateCloneProcess(weblink);
+        });
+
+        function simulateCloneProcess(weblink) {
+            // Simulate a delay to represent the cloning process
+            setTimeout(() => {
+                document.getElementById('status').innerText = `Simulated cloning of website ${weblink} completed.`;
+                document.getElementById('downloadBtn').style.display = 'block'; // Show download button
+                
+                // Change the href attribute to simulate the download
+                document.getElementById('downloadBtn').href = 'https://example.com/path/to/your/website-clone.zip';
+            }, 3000); // 3-second delay
+        }
+    </script>
+</body>
+</html>

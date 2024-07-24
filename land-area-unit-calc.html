@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Land Area Unit Converter (Nepal)</title>
+  <style>
+    #converter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  width: 750px; /* Adjust width as needed */
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+}
+
+.input-row label {
+  flex-grow: 0;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.input-row select, .input-row input {
+  margin: 5px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.input-row span {
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+#result {
+  font-weight: bold;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Land Area Unit Converter (Nepal)</h1>
+  <div id="converter">
+    <div class="input-row">
+      <label for="amount">Amount</label>
+      <input type="number" id="amount" placeholder="Enter Value">
+      <select id="fromUnit">
+        <option value="ropani">Ropani</option>
+        <option value="bigha">Bigha</option>
+        <option value="kattha">Kattha</option>
+        <option value="dhur">Dhur</option>
+        <option value="aana">Aana</option>
+        <option value="haath">Haath</option>
+      </select>
+      <span>to</span>
+      <select id="toUnit">
+        <option value="ropani">Ropani</option>
+        <option value="bigha">Bigha</option>
+        <option value="kattha">Kattha</option>
+        <option value="dhur">Dhur</option>
+        <option value="aana">Aana</option>
+        <option value="haath">Haath</option>
+      </select>
+    </div>
+    <button id="convertButton">Convert</button>
+    <div class="result-container">
+      <p id="result"></p>
+    </div>
+  </div>
+  <script>
+    const convertButton = document.getElementById("convertButton");
+const amountInput = document.getElementById("amount");
+const fromUnitSelect = document.getElementById("fromUnit");
+const toUnitSelect = document.getElementById("toUnit");
+const resultPara = document.getElementById("result");
+
+// Conversion factors
+const conversionRates = {
+  "bigha": {
+    "bigha": 1,
+    "kattha": 20,
+    "ropani": 1.6,
+    "aana": 320,
+    "dhur": 1280,
+    "haath": 4096,
+  },
+  "kattha": {
+    "bigha": 0.05,
+    "kattha": 1,
+    "ropani": 0.08,
+    "aana": 16,
+    "dhur": 64,
+    "haath": 2048,
+  },
+  "ropani": {
+    "bigha": 0.625,
+    "kattha": 12.5,
+    "ropani": 1,
+    "aana": 200,
+    "dhur": 800,
+    "haath": 2560,
+  },
+  "aana": {
+    "bigha": 0.003125,
+    "kattha": 0.0625,
+    "ropani": 0.005,
+    "aana": 1,
+    "dhur": 5,
+    "haath": 16,
+  },
+  "dhur": {
+    "bigha": 0.00078125,
+    "kattha": 0.015625,
+    "ropani": 0.00125,
+    "aana": 0.2,
+    "dhur": 1,
+    "haath": 32,
+  },
+  "haath": {
+    "bigha": 0.00024414,
+    "kattha": 0.0048828,
+    "ropani": 0.000390625,
+    "aana": 0.0625,
+    "dhur": 0.03125,
+    "haath": 1,
+  },
+};
+
+function convertArea() {
+  const value = parseFloat(amountInput.value);
+  const fromUnit = fromUnitSelect.value;
+  const toUnit = toUnitSelect.value;
+  let convertedValue;
+
+  if (!conversionRates[fromUnit] || !conversionRates[toUnit]) {
+    resultPara.textContent = "Invalid unit selection!";
+    return;
+  }
+
+  // Handle same unit conversions (e.g., ropani to ropani)
+  if (fromUnit === toUnit) {
+    convertedValue = value;
+  } else {
+    convertedValue = value * conversionRates[fromUnit][toUnit];
+  }
+
+  resultPara.textContent = `${value} ${fromUnit} is equal to ${convertedValue.toFixed(2)} ${toUnit}`;
+}
+
+convertButton.addEventListener("click", convertArea);
+
+  </script>
+</body>
+</html>
