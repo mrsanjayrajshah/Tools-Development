@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signature Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* styles.css */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  width: 90%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  margin: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #333;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"], select, input[type="color"], input[type="range"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus, input[type="color"]:focus, input[type="range"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 5px;
+  background: #007bff;
+  border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border: 2px solid #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+button:focus {
+  outline: 2px solid #0056b3;
+  outline-offset: 2px;
+}
+
+.signature-preview {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#signatureCanvas {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .buttons {
+    grid-column: span 2;
+    justify-content: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Signature Generator</h1>
+    </header>
+    <main>
+      <div class="controls">
+        <div class="input-group">
+          <label for="nameInput">Your Name</label>
+          <input type="text" id="nameInput" placeholder="Enter your name" aria-label="Enter your name" />
+        </div>
+        <div class="input-group">
+          <label for="fontSelect">Font Style</label>
+          <select id="fontSelect" aria-label="Select font style">
+            <option value="Arial">Arial</option>
+            <option value="Brush Script MT">Brush Script MT</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Lucida Handwriting">Lucida Handwriting</option>
+            <option value="Roboto">Roboto</option>
+            <!-- Additional fonts can be added here -->
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="fontStyleSelect">Font Style</label>
+          <select id="fontStyleSelect" aria-label="Select font style">
+            <option value="normal">Normal</option>
+            <option value="bold">Bold</option>
+            <option value="italic">Italic</option>
+            <option value="bold italic">Bold Italic</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="colorPicker">Text Color</label>
+          <input type="color" id="colorPicker" value="#000000" aria-label="Select text color" />
+        </div>
+        <div class="input-group">
+          <label for="bgColorPicker">Background Color</label>
+          <input type="color" id="bgColorPicker" value="#ffffff" aria-label="Select background color" />
+        </div>
+        <div class="input-group">
+          <label for="fontSizeSlider">Font Size: <span id="fontSizeValue">30px</span></label>
+          <input type="range" id="fontSizeSlider" min="10" max="100" value="30" aria-label="Adjust font size" />
+        </div>
+        <div class="buttons">
+          <button onclick="generateSignature()" aria-label="Generate signature">Generate</button>
+          <button onclick="saveSignature()" aria-label="Save signature as image">Save as Image</button>
+        </div>
+      </div>
+      <div class="signature-preview">
+        <canvas id="signatureCanvas"></canvas>
+      </div>
+    </main>
+  </div>
+  <script>
+    // script.js
+document.addEventListener('DOMContentLoaded', () => {
+  const fontSizeSlider = document.getElementById('fontSizeSlider');
+  const fontSizeValue = document.getElementById('fontSizeValue');
+  
+  fontSizeSlider.addEventListener('input', () => {
+    fontSizeValue.textContent = `${fontSizeSlider.value}px`;
+    generateSignature();
+  });
+
+  generateSignature(); // Initial render
+
+  // Add keyboard accessibility
+  document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        button.click();
+      }
+    });
+  });
+});
+
+function generateSignature() {
+  const nameInput = document.getElementById('nameInput').value;
+  const fontSelect = document.getElementById('fontSelect').value;
+  const fontStyleSelect = document.getElementById('fontStyleSelect').value;
+  const colorPicker = document.getElementById('colorPicker').value;
+  const bgColorPicker = document.getElementById('bgColorPicker').value;
+  const fontSize = document.getElementById('fontSizeSlider').value;
+
+  const canvas = document.getElementById('signatureCanvas');
+  const context = canvas.getContext('2d');
+
+  // Clear previous content
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Set canvas properties
+  canvas.width = 800;
+  canvas.height = 200;
+  context.fillStyle = bgColorPicker;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  
+  context.fillStyle = colorPicker;
+  context.font = `${fontStyleSelect} ${fontSize}px ${fontSelect}`;
+  context.textBaseline = 'middle';
+
+  // Calculate text position
+  const textWidth = context.measureText(nameInput).width;
+  const xPosition = (canvas.width - textWidth) / 2;
+  const yPosition = canvas.height / 2;
+
+  // Draw text
+  context.fillText(nameInput, xPosition, yPosition);
+}
+
+function saveSignature() {
+  const canvas = document.getElementById('signatureCanvas');
+  const link = document.createElement('a');
+  link.href = canvas.toDataURL('image/png');
+  link.download = 'signature.png';
+  link.click();
+}
+
+  </script>
+</body>
+</html>
