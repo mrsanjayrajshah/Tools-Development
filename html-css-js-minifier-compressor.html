@@ -3,164 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML, CSS, and JavaScript Minifier / Compressor</title>
+    <title>Minify HTML, CSS, JS</title>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
-    color: #333;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 90%;
-    max-width: 800px;
-}
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
 
-.heading {
-    background-color: #ff8a94;
-    color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    font-size: 24px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
+        h1 {
+            text-align: center;
+            color: #333;
+        }
 
-.form-group {
-    margin-bottom: 20px;
-}
+        textarea, input[type="file"] {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: none;
+        }
 
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-    resize: vertical;
-}
+        button:hover {
+            background-color: #218838;
+        }
 
-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
+        .size-info {
+            margin-top: 20px;
+            text-align: center;
+        }
 
-button {
-    background-color: #ff8a94;
-    border: none;
-    color: #fff;
-    padding: 12px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    margin: 5px;
-}
+        .size-info p {
+            margin: 5px 0;
+            color: #333;
+        }
 
-button:hover {
-    background-color: #ff6f7f;
-}
+        .loader {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
 
-@media (max-width: 600px) {
-    .container {
-        padding: 10px;
-    }
-}
+        .notification {
+            display: none;
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            margin-top: 10px;
+        }
 
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            button {
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="heading">HTML, CSS, and JavaScript Minifier / Compressor</h1>
-        <form id="minifierForm">
-            <div class="form-group">
-                <label for="inputCode">Paste your code here:</label>
-                <textarea id="inputCode" name="inputCode" placeholder="Paste your HTML, JavaScript, or CSS code here..." rows="10"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="typeSelect">Select Code Type:</label>
-                <select id="typeSelect" name="typeSelect">
-                    <option value="html">HTML</option>
-                    <option value="css">CSS</option>
-                    <option value="js">JavaScript</option>
-                </select>
-            </div>
-            <button type="button" id="minifyButton">Minify</button>
-            <button type="button" id="clearButton">Clear</button>
-            <div class="form-group">
-                <label for="outputCode">Minified Code:</label>
-                <textarea id="outputCode" name="outputCode" readonly rows="10"></textarea>
-            </div>
-        </form>
+        <h1>Minify HTML, CSS, JS</h1>
+        <input type="file" id="fileInput" />
+        <textarea id="inputCode" placeholder="Paste your HTML, CSS, or JS code here..."></textarea>
+        <button onclick="minifyCode()">Minify</button>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+        <textarea id="outputCode" placeholder="Minified code will appear here..." readonly></textarea>
+        <div class="size-info">
+            <p>Original Size: <span id="originalSize"></span> KB</p>
+            <p>Minified Size: <span id="minifiedSize"></span> KB</p>
+        </div>
+        <div class="loader" id="loader">Processing...</div>
+        <div class="notification" id="notification">Minified code has been copied!</div>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const minifyButton = document.getElementById('minifyButton');
-    const clearButton = document.getElementById('clearButton');
-    const inputCode = document.getElementById('inputCode');
-    const outputCode = document.getElementById('outputCode');
-    const typeSelect = document.getElementById('typeSelect');
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect);
 
-    minifyButton.addEventListener('click', function() {
-        const code = inputCode.value;
-        const type = typeSelect.value;
-        let minifiedCode = '';
-
-        switch(type) {
-            case 'html':
-                minifiedCode = minifyHTML(code);
-                break;
-            case 'css':
-                minifiedCode = minifyCSS(code);
-                break;
-            case 'js':
-                minifiedCode = minifyJS(code);
-                break;
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('inputCode').value = e.target.result;
+                };
+                reader.readAsText(file);
+            }
         }
 
-        outputCode.value = minifiedCode;
-    });
+        function minifyCode() {
+            const inputCode = document.getElementById('inputCode').value;
+            const originalSizeBytes = new Blob([inputCode]).size;
+            let minifiedCode = '';
 
-    clearButton.addEventListener('click', function() {
-        inputCode.value = '';
-        outputCode.value = '';
-    });
+            document.getElementById('loader').style.display = 'block';
 
-    function minifyHTML(html) {
-        return html.replace(/\s+/g, ' ').trim();
-    }
+            try {
+                if (inputCode.trim().startsWith('<!DOCTYPE html>') || inputCode.includes('<html>')) {
+                    minifiedCode = minifyHTML(inputCode);
+                } else if (inputCode.trim().startsWith('/*') || inputCode.includes('}')) {
+                    minifiedCode = minifyCSS(inputCode);
+                } else if (inputCode.trim().startsWith('//') || inputCode.includes('function')) {
+                    minifiedCode = minifyJS(inputCode);
+                } else {
+                    minifiedCode = inputCode.replace(/\s+/g, ' ').trim();
+                }
+            } catch (error) {
+                console.error('Error during minification:', error);
+                minifiedCode = inputCode;
+            }
 
-    function minifyCSS(css) {
-        return css.replace(/\s+/g, ' ').replace(/;\s*}/g, '}').trim();
-    }
+            const minifiedSizeBytes = new Blob([minifiedCode]).size;
+            const bytesToKB = bytes => (bytes / 1024).toFixed(2); // Convert bytes to KB
 
-    function minifyJS(js) {
-        return js.replace(/\s+/g, ' ').replace(/;\s*}/g, '}').trim();
-    }
-});
+            document.getElementById('outputCode').value = minifiedCode;
+            document.getElementById('originalSize').innerText = bytesToKB(originalSizeBytes);
+            document.getElementById('minifiedSize').innerText = bytesToKB(minifiedSizeBytes);
+            document.getElementById('loader').style.display = 'none';
+        }
 
+        function minifyHTML(html) {
+            return html
+                .replace(/<!--.*?-->/g, '') // Remove comments
+                .replace(/\s+/g, ' ') // Collapse whitespace
+                .trim();
+        }
+
+        function minifyCSS(css) {
+            return css
+                .replace(/\/\*.*?\*\//g, '') // Remove comments
+                .replace(/\s{2,}/g, ' ') // Collapse whitespace
+                .trim();
+        }
+
+        function minifyJS(js) {
+            return js
+                .replace(/\/\/.*$/gm, '') // Remove single-line comments
+                .replace(/\/\*[\s\S]*?\*\//g, '') // Remove multi-line comments
+                .replace(/\s{2,}/g, ' ') // Collapse whitespace
+                .trim();
+        }
+
+        function copyToClipboard() {
+            const outputCode = document.getElementById('outputCode');
+            outputCode.select();
+            document.execCommand('copy');
+
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
     </script>
 </body>
 </html>

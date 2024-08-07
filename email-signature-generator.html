@@ -1,251 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Email Signature Generator</title>
-  <style>
-    /* styles.css */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Signature Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
 
-.container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
+     body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        color: #333;
+      }
 
-.container:hover {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
+      .container {
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #444;
-}
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="url"],
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease-in-out;
+        }
 
-.form-group {
-  margin-bottom: 15px;
-}
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        input[type="email"]:focus,
+        input[type="url"]:focus,
+        input[type="file"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
 
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
 
-input:focus, select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
-}
+        button:hover {
+            background-color: #0056b3;
+        }
 
-#fontSizeValue {
-  display: inline-block;
-  margin-left: 10px;
-}
+        .signature-preview {
+            margin-top: 30px;
+            text-align: center;
+        }
 
-button {
-  padding: 10px 20px;
-  margin-right: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
+        .signature-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-}
+        .logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #007bff;
+            object-fit: cover;
+        }
 
-#signaturePreview {
-  margin-top: 20px;
-  text-align: center;
-}
+        .info {
+            text-align: left;
+        }
 
-#signatureCanvas {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-top: 10px;
-}
+        .info p {
+            margin: 5px 0;
+        }
 
-  </style>
+        .info p:first-child {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .social-icons a {
+            font-size: 24px;
+            margin-right: 10px;
+            transition: transform 0.2s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        #copyButton {
+            margin-top: 20px;
+            background-color: #28a745;
+        }
+
+        #copyButton:hover {
+            background-color: #218838;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 300px;
+            right: 800px;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 600px) {
+            .signature-card {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .info {
+                text-align: center;
+            }
+        }
+
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Email Signature Generator</h1>
+<div class="container">
+    <h2>Email Signature Generator</h2>
     <form id="signatureForm">
-      <div class="form-group">
-        <label for="fullName">Full Name:</label>
-        <input type="text" id="fullName" placeholder="Your Name" aria-label="Full Name">
-      </div>
-      <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" id="title" placeholder="Your Title" aria-label="Title">
-      </div>
-      <div class="form-group">
-        <label for="company">Company:</label>
-        <input type="text" id="company" placeholder="Your Company" aria-label="Company">
-      </div>
-      <div class="form-group">
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" placeholder="your.email@example.com" aria-label="Email Address">
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" placeholder="+123 456 7890" aria-label="Phone Number">
-      </div>
-      <div class="form-group">
-        <label for="website">Website:</label>
-        <input type="url" id="website" placeholder="https://www.example.com" aria-label="Website">
-      </div>
-      <div class="form-group">
-        <label for="socialMedia">Social Media Links:</label>
-        <input type="url" id="socialMedia" placeholder="https://linkedin.com/in/yourprofile" aria-label="Social Media">
-      </div>
-      <div class="form-group">
-        <label for="fontSelect">Font:</label>
-        <select id="fontSelect" aria-label="Font">
-          <option value="Arial">Arial</option>
-          <option value="Times New Roman">Times New Roman</option>
-          <option value="Georgia">Georgia</option>
-          <option value="Verdana">Verdana</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="fontStyleSelect">Font Style:</label>
-        <select id="fontStyleSelect" aria-label="Font Style">
-          <option value="normal">Normal</option>
-          <option value="bold">Bold</option>
-          <option value="italic">Italic</option>
-          <option value="bold italic">Bold Italic</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="fontSizeSlider">Font Size:</label>
-        <input type="range" id="fontSizeSlider" min="12" max="36" value="16" aria-label="Font Size">
-        <span id="fontSizeValue">16px</span>
-      </div>
-      <div class="form-group">
-        <label for="colorPicker">Text Color:</label>
-        <input type="color" id="colorPicker" value="#000000" aria-label="Text Color">
-      </div>
-      <div class="form-group">
-        <label for="bgColorPicker">Background Color:</label>
-        <input type="color" id="bgColorPicker" value="#ffffff" aria-label="Background Color">
-      </div>
-      <div class="form-group">
-        <button type="button" id="generateButton" aria-label="Generate Signature">Generate Signature</button>
-        <button type="button" id="saveButton" aria-label="Save as Image">Save as Image</button>
-      </div>
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="text" id="title" placeholder="Job Title" required>
+        <input type="text" id="company" placeholder="Company" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="url" id="website" placeholder="Website URL" required>
+        <input type="url" id="socialFacebook" placeholder="Facebook URL">
+        <input type="url" id="socialInstagram" placeholder="Instagram URL">
+        <input type="url" id="socialLinkedIn" placeholder="LinkedIn URL">
+        <input type="file" id="profilePic" accept="image/*" onchange="loadFile(event)">
+        <div class="button-container">
+            <button type="button" onclick="generateSignature()">Generate Signature</button>
+            <button type="button" onclick="resetForm()">Reset</button>
+        </div>
     </form>
-    <div id="signaturePreview" role="img" aria-label="Signature Preview">
-      <canvas id="signatureCanvas"></canvas>
+
+    <div id="signaturePreview" class="signature-preview">
+        <div class="signature-card">
+            <div class="logo">
+                <img id="previewImage" src="" alt="Profile Image">
+            </div>
+            <div class="info">
+                <p id="previewName">Name</p>
+                <p id="previewTitle">Title</p>
+                <p id="previewCompany">Company</p>
+                <p><span id="previewPhone">Phone</span> | <span id="previewEmail">Email</span> | <span id="previewWebsite">Website</span></p>
+                <div class="social-icons">
+                    <a id="previewFacebook" href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a id="previewInstagram" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a id="previewLinkedIn" href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <button id="copyButton" onclick="copyToClipboard()">Copy to Clipboard</button>
     </div>
   </div>
-  <script>
-    // script.js
-document.addEventListener('DOMContentLoaded', () => {
-  const fontSizeSlider = document.getElementById('fontSizeSlider');
-  const fontSizeValue = document.getElementById('fontSizeValue');
-  const generateButton = document.getElementById('generateButton');
-  const saveButton = document.getElementById('saveButton');
+    <div id="notification" class="notification">Signature HTML copied to clipboard!</div>
 
-  fontSizeSlider.addEventListener('input', () => {
-    fontSizeValue.textContent = `${fontSizeSlider.value}px`;
-  });
-
-  generateButton.addEventListener('click', generateSignature);
-  saveButton.addEventListener('click', saveSignature);
-
-  generateSignature(); // Initial render
-
-  // Add keyboard accessibility
-  document.querySelectorAll('button').forEach(button => {
-    button.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        button.click();
+    <script>
+      function generateSignature() {
+        document.getElementById('previewName').textContent = document.getElementById('name').value || "Name";
+        document.getElementById('previewTitle').textContent = document.getElementById('title').value || "Title";
+        document.getElementById('previewCompany').textContent = document.getElementById('company').value || "Company";
+        document.getElementById('previewPhone').textContent = document.getElementById('phone').value || "Phone";
+        document.getElementById('previewEmail').textContent = document.getElementById('email').value || "Email";
+        document.getElementById('previewWebsite').textContent = document.getElementById('website').value || "Website";
+        document.getElementById('previewFacebook').href = document.getElementById('socialFacebook').value || "#";
+        document.getElementById('previewInstagram').href = document.getElementById('socialInstagram').value || "#";
+        document.getElementById('previewLinkedIn').href = document.getElementById('socialLinkedIn').value || "#";
       }
-    });
-  });
-});
 
-function generateSignature() {
-  const fullName = document.getElementById('fullName').value;
-  const title = document.getElementById('title').value;
-  const company = document.getElementById('company').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const website = document.getElementById('website').value;
-  const socialMedia = document.getElementById('socialMedia').value;
+      function loadFile(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById('previewImage');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
 
-  const fontSelect = document.getElementById('fontSelect').value;
-  const fontStyleSelect = document.getElementById('fontStyleSelect').value;
-  const colorPicker = document.getElementById('colorPicker').value;
-  const bgColorPicker = document.getElementById('bgColorPicker').value;
-  const fontSize = document.getElementById('fontSizeSlider').value;
+      function resetForm() {
+        document.getElementById('signatureForm').reset();
+        generateSignature();
+        document.getElementById('previewImage').src = "";
+      }
 
-  const canvas = document.getElementById('signatureCanvas');
-  const context = canvas.getContext('2d');
+      function copyToClipboard() {
+        const signatureHTML = document.querySelector('.signature-card').outerHTML;
+        const tempElement = document.createElement('textarea');
+        tempElement.value = signatureHTML;
+        document.body.appendChild(tempElement);
+        tempElement.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempElement);
+        showNotification('Signature HTML copied to clipboard!');
+      }
 
-  // Set canvas properties
-  canvas.width = 800;
-  canvas.height = 200;
-  context.clearRect(0, 0, canvas.width, canvas.height);
+      function showNotification(message) {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.style.display = 'block';
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 3000);
+      }
 
-  // Set background color
-  context.fillStyle = bgColorPicker;
-  context.fillRect(0, 0, canvas.width, canvas.height);
+      document.getElementById('signatureForm').addEventListener('input', generateSignature);
+    </script>
 
-  // Set text properties
-  context.fillStyle = colorPicker;
-  context.font = `${fontStyleSelect} ${fontSize}px ${fontSelect}`;
-  context.textBaseline = 'top';
-
-  // Draw name
-  context.fillText(fullName, 20, 20);
-
-  // Draw other details
-  let textY = 40 + parseInt(fontSize, 10);
-  const details = [
-    title, company, email, phone, website, socialMedia
-  ];
-  details.forEach(detail => {
-    if (detail) {
-      context.fillText(detail, 20, textY);
-      textY += parseInt(fontSize, 10) + 10;
-    }
-  });
-}
-
-function saveSignature() {
-  const canvas = document.getElementById('signatureCanvas');
-  const link = document.createElement('a');
-  link.href = canvas.toDataURL('image/png');
-  link.download = 'email_signature.png';
-  link.click();
-}
-  </script>
 </body>
 </html>

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+        .custom-padding-2,
+        .custom-padding-md-4 {
+            padding: 1rem;
+        }
+
+        .custom-padding-md-2 {
+            padding: 0.5rem;
+        }
+
+        .custom-padding-bottom-4 {
+            padding-bottom: 2rem;
+        }
+
+        .custom-padding-x-md-3 {
+            padding: 1rem;
+        }
+
+        .input-group-custom {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .input-group-prepend-custom {
+            margin-right: 1rem;
+        }
+
+        .custom-select {
+            flex-grow: 1;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+        }
+
+        .btn-custom {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+
+        .description-calc {
+            margin-top: 1rem;
+        }
+
+        .card-custom {
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            padding: 1rem;
+            background-color: #fff;
+        }
+
+        .slider-container {
+            margin-top: 1rem;
+        }
+
+        .slider-custom {
+            width: 100%;
+            height: 15px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .slider-custom:hover {
+            opacity: 1;
+        }
+
+        .btn-custom-form-b {
+            background-color: #28a745;
+        }
+
+        .btn-custom-form-b:hover {
+            background-color: #218838;
+        }
+
+        .table-container-custom {
+            overflow-x: auto;
+            max-width: 870px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table styles */
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table-custom th, .table-custom td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table-custom th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .table-custom tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .result-container {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+    </head>
+<body>
+        <div class="custom-padding-2 custom-padding-md-4" style="max-width: 870px; margin: auto; padding: 15px">
+            <div class="custom-padding-md-2 custom-padding-bottom-4">
+                <h2 class="custom-padding-1" style="text-align: center; font-weight: bold">
+                    AdSense Revenue Calculator
+                </h2>
+                <p class="custom-padding-1" style="text-align: center">
+                    See how much your website could earn from AdSense and Header Bidding
+                </p>
+            </div>
+            <div class="custom-padding-x-md-3">
+                <div class="">
+                    <div class="input-group-custom">
+                        <div class="input-group-prepend-custom">
+                            <label class="input-group-text-custom" for="inputRegion">
+                                Select a Region
+                            </label>
+                        </div>
+                        <select id="inputRegion" class="custom-select">
+                            <option id="tier1" selected="selected" value="1">
+                                Tier 1 Countries
+                            </option>
+                            <option id="tier2" value="0.67">Tier 2 Countries</option>
+                            <option id="tier3" value="0.36">Tier 3 Countries</option>
+                        </select>
+                    </div>
+                    <div class="input-group-custom">
+                        <div class="input-group-prepend-custom">
+                            <label class="input-group-text-custom" for="inputCategory">
+                                Select a Category
+                            </label>
+                        </div>
+                        <select id="inputCategory" class="custom-select">
+                            <option selected="selected" value="0.00624">
+                                Arts & Entertainment
+                            </option>
+                            <option value="0.01244">Autos & Vehicles</option>
+                            <option value="0.01007">Beauty & Fitness</option>
+                            <option value="0.00577">Books & Literature</option>
+                            <option value="0.01831">Business & Industrial</option>
+                            <option value="0.00755">Computers & Electronics</option>
+                            <option value="0.0312">Finance</option>
+                            <option value="0.00835">Food & Drink</option>
+                            <option value="0.00494">Games</option>
+                            <option value="0.01751">Health</option>
+                            <option value="0.01126">Hobbies & Leisure</option>
+                            <option value="0.02171">Home & Garden</option>
+                            <option value="0.01362">Internet & Telecom</option>
+                            <option value="0.01371">Jobs & Education</option>
+                            <option value="0.01371">Law & Government</option>
+                            <option value="0.00712">News</option>
+                            <option value="0.00843">Online Communities</option>
+                            <option value="0.01009">People & Society</option>
+                            <option value="0.01242">Pets & Animals</option>
+                            <option value="0.02241">Real Estate</option>
+                            <option value="0.00905">Reference</option>
+                            <option value="0.00847">Science</option>
+                            <option value="0.01323">Shopping</option>
+                            <option value="0.00648">Sports</option>
+                            <option value="0.01535">Travel</option>
+                        </select>
+                    </div>
+                    <button class="btn-custom" onclick="showTierList('tier1')">
+                        Tier 1 Country List
+                    </button>
+                    <button class="btn-custom" onclick="showTierList('tier2')">
+                        Tier 2 Country List
+                    </button>
+                    <button class="btn-custom" onclick="showTierList('tier3')">
+                        Tier 3 Country List
+                    </button>
+                    <div class="slider-container">
+                        <input
+                            id="revenueSlider"
+                            type="range"
+                            min="0"
+                            max="1000000"
+                            value="50000"
+                            class="slider-custom"
+                        />
+                      <div class="pageviewstitle">Pageviews Per Month: <span id="revenueDisplay">50,000</span></div>
+                    </div>
+                    <button class="btn-custom btn-custom-form-b" onclick="calculateRevenue()">
+                        Calculate Revenue
+                    </button>
+                    <!-- Result container -->
+                    <div id="result" class="result-container"></div>
+                    <div id="tier1Countries" class="description-calc" style="display: none">
+                        <div class="card-custom">
+                            <p style="font-weight: bold">Tier 1 Countries</p>
+                            <p>
+                                Australia, Austria, Belgium, Canada, Denmark, Finland, France,
+                                Germany, Ireland, Italy, Luxembourg, Netherlands, New Zealand,
+                                Norway, Spain, Sweden, Switzerland, United Kingdom, United
+                                States of America
+                            </p>
+                        </div>
+                    </div>
+                    <div id="tier2Countries" class="description-calc" style="display: none">
+                        <div class="card-custom">
+                            <p style="font-weight: bold">Tier 2 Countries</p>
+                            <p>
+                                Andorra, Argentina, Bahamas, Belarus, Bolivia, Bosnia and
+                                Herzegovina, Brazil, Brunei, Bulgaria, Chile, China, Colombia,
+                                Costa Rica, Croatia, Cyprus, Czech Republic, Dominican
+                                Republic, Ecuador, Egypt, Estonia, Fiji, Greece, Guyana, Hong
+                                Kong, Hungary, Iceland, Indonesia, Israel, Japan, Kazakhstan,
+                                Latvia, Lithuania, Macao, Malaysia, Malta, Mexico, Montenegro,
+                                Morocco, Nepal, Oman, Panama, Paraguay, Peru, Philippines,
+                                Poland, Portugal, Puerto Rico, Qatar, Republic of Korea
+                                (South), Romania, Russian Federation, Saudi Arabia, Serbia,
+                                Singapore, Slovakia, Slovenia, South Africa, Thailand, Turkey,
+                                Ukraine, United Arab Emirates, Uruguay, Vanuatu
+                            </p>
+                        </div>
+                    </div>
+                    <div id="tier3Countries" class="description-calc" style="display: none">
+                        <div class="card-custom">
+                            <p style="font-weight: bold">Tier 3 Countries</p>
+                            <p>
+                                Afghanistan, Albania, Algeria, Angola, Armenia, Azerbaijan, Benin,
+                                Bhutan, Bolivia, Botswana, Burkina Faso, Burundi, Cambodia, Cape
+                                Verde, Central African Republic, Chad, Comoros, Congo, Democratic
+                                Republic of the, Republic of the, Djibouti, East Timor, Equatorial
+                                Guinea, Eritrea, Eswatini, Ethiopia, Gabon, Gambia, Georgia, Ghana,
+                                Guinea, Guinea-Bissau, Haiti, Honduras, India, Indonesia, Iraq, Iran,
+                                Ivory Coast, Jordan, Kenya, Kiribati, Kosovo, Kyrgyzstan, Laos,
+                                Lebanon, Lesotho, Liberia, Libya, Madagascar, Malawi, Mali, Mauritania,
+                                Mauritius, Moldova, Mongolia, Morocco, Mozambique, Myanmar, Namibia,
+                                Nauru, Niger, Nigeria, North Korea, Papua New Guinea, Rwanda, Samoa,
+                                San Marino, Saudi Arabia, Senegal, Seychelles, Sierra Leone, Solomon
+                                Islands, Somalia, South Sudan, Sri Lanka, Sudan, Suriname, Syria,
+                                Tajikistan, Tanzania, Togo, Tonga, Tunisia, Turkmenistan, Tuvalu,
+                                Uganda, Uzbekistan, Vanuatu, Venezuela, Vietnam, Western Sahara,
+                                Yemen, Zambia, Zimbabwe
+                            </p>
+                        </div>
+                    </div>
+                </div>
+				<br>
+                <div class="card-custom">
+                    <div class="table-container-custom">
+                        <h2 class="custom-padding-2">AdSense Revenue Data Table</h2>
+                        <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <th>CTR</th>
+                            <th>CPC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Luxembourg</td>
+                            <td>0.55%</td>
+                            <td>$0.65</td>
+                        </tr>
+                        <tr>
+                            <td>United States</td>
+                            <td>0.75%</td>
+                            <td>$0.61</td>
+                        </tr>
+                        <tr>
+                            <td>Australia</td>
+                            <td>0.72%</td>
+                            <td>$0.57</td>
+                        </tr>
+                        <tr>
+                            <td>United Kingdom</td>
+                            <td>1.06%</td>
+                            <td>$0.48</td>
+                        </tr>
+                        <tr>
+                            <td>Finland</td>
+                            <td>0.54%</td>
+                            <td>$0.45</td>
+                        </tr>
+                        <tr>
+                            <td>Canada</td>
+                            <td>0.79%</td>
+                            <td>$0.45</td>
+                        </tr>
+                        <tr>
+                            <td>Austria</td>
+                            <td>0.69%</td>
+                            <td>$0.45</td>
+                        </tr>
+                        <tr>
+                            <td>New Zealand</td>
+                            <td>1.21%</td>
+                            <td>$0.33</td>
+                        </tr>
+                        <tr>
+                            <td>Sweden</td>
+                            <td>0.70%</td>
+                            <td>$0.31</td>
+                        </tr>
+                        <tr>
+                            <td>Ireland</td>
+                            <td>0.73%</td>
+                            <td>$0.31</td>
+                        </tr>
+                        <tr>
+                            <td>Denmark</td>
+                            <td>0.70%</td>
+                            <td>$0.28</td>
+                        </tr>
+                        <tr>
+                            <td>Singapore</td>
+                            <td>0.96%</td>
+                            <td>$0.27</td>
+                        </tr>
+                        <tr>
+                            <td>South Africa</td>
+                            <td>1.13%</td>
+                            <td>$0.26</td>
+                        </tr>
+                        <tr>
+                            <td>Norway</td>
+                            <td>0.63%</td>
+                            <td>$0.26</td>
+                        </tr>
+                        <tr>
+                            <td>Unknown Region</td>
+                            <td>0.63%</td>
+                            <td>$0.25</td>
+                        </tr>
+                        <tr>
+                            <td>Bahamas</td>
+                            <td>1.71%</td>
+                            <td>$0.24</td>
+                        </tr>
+                        <tr>
+                            <td>Germany</td>
+                            <td>0.52%</td>
+                            <td>$0.22</td>
+                        </tr>
+                        <tr>
+                            <td>Switzerland</td>
+                            <td>0.59%</td>
+                            <td>$0.21</td>
+                        </tr>
+                        <tr>
+                            <td>Belgium</td>
+                            <td>0.53%</td>
+                            <td>$0.21</td>
+                        </tr>
+                        <tr>
+                            <td>Spain</td>
+                            <td>0.67%</td>
+                            <td>$0.19</td>
+                        </tr>
+                        <tr>
+                            <td>Djibouti</td>
+                            <td>3.06%</td>
+                            <td>$0.19</td>
+                        </tr>
+                        <tr>
+                            <td>Thailand</td>
+                            <td>0.80%</td>
+                            <td>$0.17</td>
+                        </tr>
+                        <tr>
+                            <td>France</td>
+                            <td>0.76%</td>
+                            <td>$0.17</td>
+                        </tr>
+                        <tr>
+                            <td>Colombia</td>
+                            <td>0.29%</td>
+                            <td>$0.17</td>
+                        </tr>
+                        <tr>
+                            <td>Puerto Rico</td>
+                            <td>1.40%</td>
+                            <td>$0.16</td>
+                        </tr>
+                        <tr>
+                            <td>Guatemala</td>
+                            <td>0.74%</td>
+                            <td>$0.16</td>
+                        </tr>
+                        <tr>
+                            <td>Greece</td>
+                            <td>0.64%</td>
+                            <td>$0.16</td>
+                        </tr>
+                        <tr>
+                            <td>United Arab Emirates</td>
+                            <td>1.37%</td>
+                            <td>$0.15</td>
+                        </tr>
+                        <tr>
+                            <td>Russia</td>
+                            <td>0.39%</td>
+                            <td>$0.15</td>
+                        </tr>
+                        <tr>
+                            <td>Malta</td>
+                            <td>1.34%</td>
+                            <td>$0.15</td>
+                        </tr>
+                        <tr>
+                            <td>U.S. Virgin Islands</td>
+                            <td>3.85%</td>
+                            <td>$0.14</td>
+                        </tr>
+                        <tr>
+                            <td>Mexico</td>
+                            <td>0.39%</td>
+                            <td>$0.14</td>
+                        </tr>
+                        <tr>
+                            <td>Japan</td>
+                            <td>1.14%</td>
+                            <td>$0.14</td>
+                        </tr>
+                        <tr>
+                            <td>Italy</td>
+                            <td>1.35%</td>
+                            <td>$0.13</td>
+                        </tr>
+                        <tr>
+                            <td>Hungary</td>
+                            <td>0.76%</td>
+                            <td>$0.13</td>
+                        </tr>
+                        <tr>
+                            <td>Hong Kong</td>
+                            <td>0.94%</td>
+                            <td>$0.13</td>
+                        </tr>
+                        <tr>
+                            <td>Côte d’Ivoire</td>
+                            <td>0.69%</td>
+                            <td>$0.13</td>
+                        </tr>
+                        <tr>
+                            <td>Somalia</td>
+                            <td>0.94%</td>
+                            <td>$0.12</td>
+                        </tr>
+                        <tr>
+                            <td>Dominica</td>
+                            <td>2.33%</td>
+                            <td>$0.12</td>
+                        </tr>
+                        <tr>
+                            <td>Costa Rica</td>
+                            <td>0.45%</td>
+                            <td>$0.12</td>
+                        </tr>
+                        <tr>
+                            <td>Brazil</td>
+                            <td>0.79%</td>
+                            <td>$0.12</td>
+                        </tr>
+                        <tr>
+                            <td>Yemen</td>
+                            <td>0.33%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Uganda</td>
+                            <td>0.80%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Panama</td>
+                            <td>1.68%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Oman</td>
+                            <td>1.43%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Nigeria</td>
+                            <td>0.76%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Malaysia</td>
+                            <td>0.94%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Kuwait</td>
+                            <td>1.56%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Israel</td>
+                            <td>1.21%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Dominican Republic</td>
+                            <td>1.12%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>China</td>
+                            <td>0.66%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Cayman Islands</td>
+                            <td>0.68%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Botswana</td>
+                            <td>1.38%</td>
+                            <td>$0.11</td>
+                        </tr>
+                        <tr>
+                            <td>South Korea</td>
+                            <td>0.82%</td>
+                            <td>$0.10</td>
+                        </tr>
+                        <tr>
+                            <td>Turkey</td>
+                            <td>0.64%</td>
+                            <td>$0.09</td>
+                        </tr>
+                        <tr>
+                            <td>Chile</td>
+                            <td>1.11%</td>
+                            <td>$0.09</td>
+                        </tr>
+                        <tr>
+                            <td>Argentina</td>
+                            <td>0.77%</td>
+                            <td>$0.09</td>
+                        </tr>
+                        <tr>
+                            <td>Pakistan</td>
+                            <td>1.62%</td>
+                            <td>$0.09</td>
+                        </tr>
+                        <tr>
+                            <td>India</td>
+                            <td>1.02%</td>
+                            <td>$0.09</td>
+                        </tr>
+                        <tr>
+                            <td>Philippines</td>
+                            <td>1.21%</td>
+                            <td>$0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Peru</td>
+                            <td>1.17%</td>
+                            <td>$0.08</td>
+                        </tr>
+                        <tr>
+                            <td>El Salvador</td>
+                            <td>1.25%</td>
+                            <td>$0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Egypt</td>
+                            <td>0.59%</td>
+                            <td>$0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Malaysia</td>
+                            <td>0.71%</td>
+                            <td>$0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Sri Lanka</td>
+                            <td>0.84%</td>
+                            <td>$0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Jamaica</td>
+                            <td>1.40%</td>
+                            <td>$0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Honduras</td>
+                            <td>1.49%</td>
+                            <td>$0.07</td>
+                        </tr>
+                        <tr>
+                            <td>Nepal</td>
+                            <td>1.25%</td>
+                            <td>$0.07</td>
+                        </tr>
+                        <tr>
+                            <td>Morocco</td>
+                            <td>0.53%</td>
+                            <td>$0.07</td>
+                        </tr>
+                        <tr>
+                            <td>Bolivia</td>
+                            <td>0.63%</td>
+                            <td>$0.07</td>
+                        </tr>
+                        <tr>
+                            <td>Algeria</td>
+                            <td>0.67%</td>
+                            <td>$0.06</td>
+                        </tr>
+                        <tr>
+                            <td>Myanmar</td>
+                            <td>0.91%</td>
+                            <td>$0.06</td>
+                        </tr>
+                        <tr>
+                            <td>Bangladesh</td>
+                            <td>0.96%</td>
+                            <td>$0.05</td>
+                        </tr>
+                        <tr>
+                            <td>Vietnam</td>
+                            <td>1.09%</td>
+                            <td>$0.05</td>
+                        </tr>
+                        <tr>
+                            <td>Pakistan</td>
+                            <td>1.53%</td>
+                            <td>$0.05</td>
+                        </tr>
+                        <tr>
+                            <td>Afghanistan</td>
+                            <td>1.30%</td>
+                            <td>$0.05</td>
+                        </tr>
+                    </tbody>
+                </table>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </body>
+    <script>
+        document.getElementById('revenueSlider').addEventListener('input', function() {
+            document.getElementById('revenueDisplay').textContent = this.value.toLocaleString();
+        });
+
+        function showTierList(tierId) {
+            document.getElementById('tier1Countries').style.display = 'none';
+            document.getElementById('tier2Countries').style.display = 'none';
+            document.getElementById('tier3Countries').style.display = 'none';
+            document.getElementById(tierId + 'Countries').style.display = 'block';
+        }
+
+        function calculateRevenue() {
+            const regionMultiplier = parseFloat(document.getElementById('inputRegion').value);
+            const categoryCPC = parseFloat(document.getElementById('inputCategory').value);
+            const sliderValue = parseFloat(document.getElementById('revenueSlider').value);
+
+            const calculatedRevenue = (sliderValue * regionMultiplier * categoryCPC).toFixed(2);
+
+            document.getElementById('result').textContent = `Estimated Revenue: $${calculatedRevenue}`;
+        }
+    </script>
+</html>

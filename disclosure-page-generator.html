@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclosure Page Generator Tool</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#notification {
+    display: none;
+    color: green;
+    font-weight: bold;
+}
+
+#previewContainer {
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .button-group {
+        flex-direction: column;
+    }
+
+    button {
+        margin-bottom: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Disclosure Page Generator Tool</h1>
+        <form id="disclosureForm">
+            <div class="form-group">
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" name="companyName" placeholder="Enter company name" required>
+            </div>
+            <div class="form-group">
+                <label for="websiteUrl">Website URL:</label>
+                <input type="text" id="websiteUrl" name="websiteUrl" placeholder="Enter website URL" required>
+            </div>
+            <div class="form-group">
+                <label for="contactEmail">Contact Email:</label>
+                <input type="email" id="contactEmail" name="contactEmail" placeholder="Enter contact email" required>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="generateDisclosure()">Generate Disclosure</button>
+                <button type="reset">Reset</button>
+            </div>
+            <div class="form-group">
+                <label for="disclosure">Generated Disclosure:</label>
+                <textarea id="disclosure" name="disclosure" readonly></textarea>
+                <button type="button" id="copyButton">Copy to Clipboard</button>
+                <div id="notification" class="notification">Copied!</div>
+            </div>
+            <div id="previewContainer">
+                <h2>Preview</h2>
+                <div id="previewContent"></div>
+            </div>
+        </form>
+    </div>
+    <script>
+        function generateDisclosure() {
+    const companyName = document.getElementById('companyName').value;
+    const websiteUrl = document.getElementById('websiteUrl').value;
+    const contactEmail = document.getElementById('contactEmail').value;
+    
+    if (companyName && websiteUrl && contactEmail) {
+        const disclosureText = `
+            <h2>Disclosure</h2>
+            <p>Welcome to ${companyName}.</p>
+            <p>This website, ${websiteUrl}, is owned and operated by ${companyName}. For any inquiries, please contact us at ${contactEmail}.</p>
+            <p>We may receive compensation for some of the links on this site. We do our best to provide accurate and up-to-date information, but we cannot guarantee the completeness or reliability of the content provided.</p>
+            <p>All information on this site is for informational purposes only and does not constitute legal or financial advice.</p>
+        `;
+        
+        document.getElementById('disclosure').value = disclosureText;
+        document.getElementById('previewContent').innerHTML = disclosureText;
+    } else {
+        alert('Please fill in all fields.');
+    }
+}
+
+document.getElementById('copyButton').addEventListener('click', function() {
+    const disclaimerText = document.getElementById('disclosure');
+    disclaimerText.select();
+    document.execCommand('copy');
+    document.getElementById('notification').style.display = 'block';
+    setTimeout(() => {
+        document.getElementById('notification').style.display = 'none';
+    }, 2000);
+});
+
+    </script>
+</body>
+</html>
