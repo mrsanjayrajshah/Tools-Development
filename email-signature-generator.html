@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Signature Generator</title>
+  <style>
+    /* styles.css */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+#fontSizeValue {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+#signaturePreview {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#signatureCanvas {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Email Signature Generator</h1>
+    <form id="signatureForm">
+      <div class="form-group">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" placeholder="Your Name" aria-label="Full Name">
+      </div>
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" placeholder="Your Title" aria-label="Title">
+      </div>
+      <div class="form-group">
+        <label for="company">Company:</label>
+        <input type="text" id="company" placeholder="Your Company" aria-label="Company">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" placeholder="your.email@example.com" aria-label="Email Address">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" placeholder="+123 456 7890" aria-label="Phone Number">
+      </div>
+      <div class="form-group">
+        <label for="website">Website:</label>
+        <input type="url" id="website" placeholder="https://www.example.com" aria-label="Website">
+      </div>
+      <div class="form-group">
+        <label for="socialMedia">Social Media Links:</label>
+        <input type="url" id="socialMedia" placeholder="https://linkedin.com/in/yourprofile" aria-label="Social Media">
+      </div>
+      <div class="form-group">
+        <label for="fontSelect">Font:</label>
+        <select id="fontSelect" aria-label="Font">
+          <option value="Arial">Arial</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Verdana">Verdana</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="fontStyleSelect">Font Style:</label>
+        <select id="fontStyleSelect" aria-label="Font Style">
+          <option value="normal">Normal</option>
+          <option value="bold">Bold</option>
+          <option value="italic">Italic</option>
+          <option value="bold italic">Bold Italic</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="fontSizeSlider">Font Size:</label>
+        <input type="range" id="fontSizeSlider" min="12" max="36" value="16" aria-label="Font Size">
+        <span id="fontSizeValue">16px</span>
+      </div>
+      <div class="form-group">
+        <label for="colorPicker">Text Color:</label>
+        <input type="color" id="colorPicker" value="#000000" aria-label="Text Color">
+      </div>
+      <div class="form-group">
+        <label for="bgColorPicker">Background Color:</label>
+        <input type="color" id="bgColorPicker" value="#ffffff" aria-label="Background Color">
+      </div>
+      <div class="form-group">
+        <button type="button" id="generateButton" aria-label="Generate Signature">Generate Signature</button>
+        <button type="button" id="saveButton" aria-label="Save as Image">Save as Image</button>
+      </div>
+    </form>
+    <div id="signaturePreview" role="img" aria-label="Signature Preview">
+      <canvas id="signatureCanvas"></canvas>
+    </div>
+  </div>
+  <script>
+    // script.js
+document.addEventListener('DOMContentLoaded', () => {
+  const fontSizeSlider = document.getElementById('fontSizeSlider');
+  const fontSizeValue = document.getElementById('fontSizeValue');
+  const generateButton = document.getElementById('generateButton');
+  const saveButton = document.getElementById('saveButton');
+
+  fontSizeSlider.addEventListener('input', () => {
+    fontSizeValue.textContent = `${fontSizeSlider.value}px`;
+  });
+
+  generateButton.addEventListener('click', generateSignature);
+  saveButton.addEventListener('click', saveSignature);
+
+  generateSignature(); // Initial render
+
+  // Add keyboard accessibility
+  document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        button.click();
+      }
+    });
+  });
+});
+
+function generateSignature() {
+  const fullName = document.getElementById('fullName').value;
+  const title = document.getElementById('title').value;
+  const company = document.getElementById('company').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const website = document.getElementById('website').value;
+  const socialMedia = document.getElementById('socialMedia').value;
+
+  const fontSelect = document.getElementById('fontSelect').value;
+  const fontStyleSelect = document.getElementById('fontStyleSelect').value;
+  const colorPicker = document.getElementById('colorPicker').value;
+  const bgColorPicker = document.getElementById('bgColorPicker').value;
+  const fontSize = document.getElementById('fontSizeSlider').value;
+
+  const canvas = document.getElementById('signatureCanvas');
+  const context = canvas.getContext('2d');
+
+  // Set canvas properties
+  canvas.width = 800;
+  canvas.height = 200;
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Set background color
+  context.fillStyle = bgColorPicker;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Set text properties
+  context.fillStyle = colorPicker;
+  context.font = `${fontStyleSelect} ${fontSize}px ${fontSelect}`;
+  context.textBaseline = 'top';
+
+  // Draw name
+  context.fillText(fullName, 20, 20);
+
+  // Draw other details
+  let textY = 40 + parseInt(fontSize, 10);
+  const details = [
+    title, company, email, phone, website, socialMedia
+  ];
+  details.forEach(detail => {
+    if (detail) {
+      context.fillText(detail, 20, textY);
+      textY += parseInt(fontSize, 10) + 10;
+    }
+  });
+}
+
+function saveSignature() {
+  const canvas = document.getElementById('signatureCanvas');
+  const link = document.createElement('a');
+  link.href = canvas.toDataURL('image/png');
+  link.download = 'email_signature.png';
+  link.click();
+}
+  </script>
+</body>
+</html>
