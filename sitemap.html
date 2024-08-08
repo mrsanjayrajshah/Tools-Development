@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML Sitemap Generator</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.button-group {
+    text-align: center;
+}
+
+.button-group button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+button[type="button"] {
+    background-color: #28a745;
+    color: #fff;
+}
+
+button[type="reset"] {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+#sitemap {
+    height: 150px;
+    resize: vertical;
+}
+
+#notification {
+    display: none;
+    color: #28a745;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">XML Sitemap Generator</h1>
+        <form id="sitemapForm">
+            <div class="form-group">
+                <label for="websiteUrl">Enter Website URL:</label>
+                <input type="text" id="websiteUrl" name="websiteUrl" placeholder="https://example.com" required>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="generateSitemap()">Generate Sitemap</button>
+                <button type="reset">Reset</button>
+            </div>
+            <div class="form-group">
+                <label for="sitemap">Generated XML Sitemap:</label>
+                <textarea id="sitemap" name="sitemap" readonly></textarea>
+                <button type="button" id="copyButton">Copy to Clipboard</button>
+                <div id="notification" class="notification">Copied!</div>
+            </div>
+        </form>
+    </div>
+    <script>
+        function generateSitemap() {
+    const url = document.getElementById('websiteUrl').value;
+    const sitemap = `
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>${url}</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+</urlset>
+    `.trim();
+
+    document.getElementById('sitemap').value = sitemap;
+}
+
+document.getElementById('copyButton').addEventListener('click', function() {
+    const sitemapText = document.getElementById('sitemap');
+    sitemapText.select();
+    document.execCommand('copy');
+    document.getElementById('notification').style.display = 'block';
+    setTimeout(() => {
+        document.getElementById('notification').style.display = 'none';
+    }, 2000);
+});
+
+    </script>
+</body>
+</html>
