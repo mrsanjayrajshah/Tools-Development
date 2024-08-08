@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BS to AD and Vice Versa Date Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .converter {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .output-section p {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Date Converter</h1>
+        <div class="converter">
+            <div class="input-section">
+                <label for="bs-date">BS Date:</label>
+                <input type="date" id="bs-date">
+                <button onclick="convertBSToAD()">Convert to AD</button>
+            </div>
+            <div class="output-section">
+                <p id="ad-date"></p>
+            </div>
+            <div class="input-section">
+                <label for="ad-date-input">AD Date:</label>
+                <input type="date" id="ad-date-input">
+                <button onclick="convertADToBS()">Convert to BS</button>
+            </div>
+            <div class="output-section">
+                <p id="bs-date-output"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const bsToAdData = {
+            2053: [1996, 1997],
+            2054: [1997, 1998],
+            2055: [1998, 1999],
+            2056: [1999, 2000],
+            2057: [2000, 2001],
+            2058: [2001, 2002],
+            2059: [2002, 2003],
+            2060: [2003, 2004],
+            2061: [2004, 2005],
+            2062: [2005, 2006],
+            2063: [2006, 2007],
+            2064: [2007, 2008],
+            2065: [2008, 2009],
+            2066: [2009, 2010],
+            2067: [2010, 2011],
+            2068: [2011, 2012],
+            2069: [2012, 2013],
+            2070: [2013, 2014],
+            2071: [2014, 2015],
+            2072: [2015, 2016],
+            2073: [2016, 2017],
+            2074: [2017, 2018],
+            2075: [2018, 2019],
+            2076: [2019, 2020],
+            2077: [2020, 2021],
+            2078: [2021, 2022],
+            2079: [2022, 2023],
+            2080: [2023, 2024]
+        };
+
+        const adToBsData = {
+            1996: [2053, 2054],
+            1997: [2053, 2054],
+            1998: [2054, 2055],
+            1999: [2055, 2056],
+            2000: [2056, 2057],
+            2001: [2057, 2058],
+            2002: [2058, 2059],
+            2003: [2059, 2060],
+            2004: [2060, 2061],
+            2005: [2061, 2062],
+            2006: [2062, 2063],
+            2007: [2063, 2064],
+            2008: [2064, 2065],
+            2009: [2065, 2066],
+            2010: [2066, 2067],
+            2011: [2067, 2068],
+            2012: [2068, 2069],
+            2013: [2069, 2070],
+            2014: [2070, 2071],
+            2015: [2071, 2072],
+            2016: [2072, 2073],
+            2017: [2073, 2074],
+            2018: [2074, 2075],
+            2019: [2075, 2076],
+            2020: [2076, 2077],
+            2021: [2077, 2078],
+            2022: [2078, 2079],
+            2023: [2079, 2080],
+            2024: [2080, 2081]
+        };
+
+        function convertBSToAD() {
+            const bsDate = document.getElementById("bs-date").value;
+            if (!bsDate) return;
+
+            const [bsYear, bsMonth, bsDay] = bsDate.split("-").map(Number);
+            const adYear = bsToAdData[bsYear];
+            if (!adYear) {
+                document.getElementById("ad-date").textContent = "Invalid BS Date";
+                return;
+            }
+            const adDate = new Date(adYear[0], bsMonth - 1, bsDay);
+            const formattedDate = adDate.toISOString().split('T')[0];
+
+            document.getElementById("ad-date").textContent = `AD Date: ${formattedDate}`;
+        }
+
+        function convertADToBS() {
+            const adDate = document.getElementById("ad-date-input").value;
+            if (!adDate) return;
+
+            const [adYear, adMonth, adDay] = adDate.split("-").map(Number);
+            const bsYear = adToBsData[adYear];
+            if (!bsYear) {
+                document.getElementById("bs-date-output").textContent = "Invalid AD Date";
+                return;
+            }
+            const bsDate = new Date(bsYear[0], adMonth - 1, adDay);
+            const formattedDate = bsDate.toISOString().split('T')[0];
+
+            document.getElementById("bs-date-output").textContent = `BS Date: ${formattedDate}`;
+        }
+    </script>
+</body>
+</html>
