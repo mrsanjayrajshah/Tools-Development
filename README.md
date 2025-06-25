@@ -50,7 +50,7 @@ Each tool is housed in its respective folder, containing the following:
 1. Clone or download this repository
 2. Open any `.html` file directly in your web browser
 3. Tools work offline and don't require an internet connection
-4. Kindly leave a star if you loved it.
+4. Kindly leave a star if you loved it
 
 
 
