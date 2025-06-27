@@ -10,8 +10,8 @@ This repository contains various standalone web tools that can be used directly 
 
 Each tool is housed in its respective folder, containing the following:
 
-- `index.html`: The main HTML file for the tool.
-- `style.css`: The CSS file for styling the tool.
+- `index.html`: The main HTML file for the tool,
+- `style.css`: The CSS file for styling the tool,
 - `script.js`: The JavaScript file for tool functionality.
 
 ## 🛠️ Tools
