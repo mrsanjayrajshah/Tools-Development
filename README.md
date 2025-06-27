@@ -4,7 +4,7 @@ A curated collection of web-based development tools built with modern HTML, CSS,
 
 ## 🚀 Overview
 
-This repository contains various standalone web tools that can be used directly in any modern web browser. All tools are built using vanilla web technologies without external dependencies, making them fast, reliable, and easy to deploy.
+This repository contains various standalone web tools that can be used directly in any modern web browser. All tools are built using vanilla web technologies without external dependencies, making them fast, reliable and easy to deploy.
 
 ## 📁 Project Structure
 
