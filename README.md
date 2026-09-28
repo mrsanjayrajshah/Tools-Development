@@ -1,6 +1,6 @@
 # Tools Development Collection
 
-A curated collection of web-based development tools built with modern HTML, CSS, and JavaScript. Each tool is designed to be lightweight, responsive, and professional-grade for everyday development and productivity tasks.
+A curated collection of web-based development tools built with modern HTML, CSS, and JavaScript. Each tool is designed to be lightweight, responsive, and professional-grade for everyday development and productivity tasks..
 
 ## 🚀 Overview
 
